@@ -70,4 +70,4 @@ def coInfo(request):
         'query': q,
     }
 
-    return render(request, 'covid_19/home.html', context)
+    return render(request, 'covid19.html', context)

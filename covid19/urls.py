@@ -3,7 +3,7 @@ from . import views
 
 
 urlpatterns = [
-    path('CoronavirusUpdates/', views.coInfo, name='CovUpdate'),
+    path('Covid19Info/', views.coInfo, name='CovUpdate'),
     # path('info/', views.search, name='results'),
 
 ]

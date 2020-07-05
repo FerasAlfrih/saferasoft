@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class Covid19Config(AppConfig):
-    name = 'covid_19'
+    name = 'covid19'
