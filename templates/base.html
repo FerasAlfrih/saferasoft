@@ -17,11 +17,11 @@
             <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
         <title>Saferasoft-{% block title %}Home{% endblock title %}</title>
     </head>
-    <body id="page-top" style="background-color: #b9f2ff">
+    <body id="page-top" style="background-color: #b3cfbb">
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand js-scroll-trigger" href="{% url 'base' %}"><img src="{% static 'img/logo.png' %}"alt="Saferasoft" /></a>
+                <a class="navbar-brand js-scroll-trigger" href="{% url 'base' %}"><img src="{% static 'img/logo.png' %}" alt="Saferasoft" /></a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars ml-1"></i>
@@ -54,9 +54,11 @@
                 <!-- Masthead-->
                 <header class="masthead">
                     <div class="container">
-                        <div class="masthead-subheading">Welcome To Saferasoft!</div>
-                        <div class="masthead-heading text-uppercase">It's Nice To Meet You</div>
-                        <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#services">Tell Me More</a>
+                        <div class="masthead-heading text-primary text-uppercase text-lg-right">
+                            <i>This is Saferasoft!</i>
+                        </div>
+                        <div class="masthead-subheading text-lg-right"><h3>we convert ideas into codes!</h3></div>
+                        <a class="btn btn-outline-primary btn-xl text-uppercase js-scroll-trigger" href="#services">Tell Me More</a>
                     </div>
                 </header>
             {% endblock content %}
