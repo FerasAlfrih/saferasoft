@@ -11,7 +11,7 @@
         <section class="page-section" id="team">
             <div class="container">
                 <center>
-                    <h2 class="section-heading text-uppercase">{{ country }}</h2>
+                    <h2 class="section-heading text-uppercase"><i>{{ country }}</i></h2>
                     <h3 class="section-subheading text-muted"><a href="http://www.wikipedia.com/wiki/{{ country }}">Wikipedia</a></h3>
                     <div>
                         <form method="GET" id="infoForm" name="infoForm" action="/cov19/Covid19Info/">
@@ -23,11 +23,11 @@
                     <div>
                         <span>
                             <h4>Total Cases:</h4>
-                            <h4 class="text-info">{{ totalcases }}<small class="text-danger"> ({{ newcases }})</small></h4><br>
+                            <h4 class="text-primary">{{ totalcases }}<small class="text-danger"><b> ({{ newcases }})</b></small></h4><br>
                         </span>
                         <span>
                             <h4>Total Deathes:</h4>
-                            <h4 class="text-warning">{{ totaldeathes }}<small class="text-danger"> ({{ newdeathes }})</small></h4><br>
+                            <h4 class="text-warning">{{ totaldeathes }}<small class="text-danger"><b> ({{ newdeathes }})</b></small></h4><br>
                         </span>
                     </div>
                 </center>
