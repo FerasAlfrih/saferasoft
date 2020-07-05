@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # myapps
     'covid19.apps.Covid19Config',
     'django_countries',
+    'rest_framework',
 
 ]
 
