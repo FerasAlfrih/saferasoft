@@ -44,7 +44,7 @@ def coInfo(request):
     else:
         query = 'world'
 
-    if query == 'usa' or query == 'Usa' or query == 'USa' or query == 'uk' or query == 'Uk':
+    if query == 'usa' or query == 'Usa' or query == 'USa' or query == 'uk' or query == 'Uk' or query == 'uae' or query == 'uAE' or query == 'uaE' or query == 'UAe' or query == 'Uae':
         q = str(query).upper()
     else:
         q = str(query).title()
