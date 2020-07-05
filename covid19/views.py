@@ -37,7 +37,7 @@ def scraper(request):
 
 def coInfo(request):
     context = {}
-    #scraper(request)
+    scraper(request)
 
     if request.GET.get('query'):
         query = request.GET.get('query')
