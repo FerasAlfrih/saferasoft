@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
-    {% block title %}About{% endblock title %}
+    {% block title %}
+        {% if query %}
+            {{ query }}
+        {% else %}
+            World
+        {% endif %}
+    {% endblock title %}
     {% block content %}
         <section class="page-section" id="team">
             <div class="container">
