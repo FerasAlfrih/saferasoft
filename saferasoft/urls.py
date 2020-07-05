@@ -25,4 +25,4 @@ urlpatterns = [
     path('team/', mv.team, name="team"),
     path('contact/', mv.contact, name="contact"),
     path('services/', mv.services, name="services"),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
