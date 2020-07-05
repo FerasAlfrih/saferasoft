@@ -39,17 +39,7 @@
             </div>
         </nav>
         <div class="container">
-            {% if messages %}<br/><br/><br/>
-                <center>
-                    <div class="col-lg-4 my-3 my-lg-0">
-                        {% for message in messages %}
-                            <div class="alert alert-{{ message.tags }}">
-                              <a href="#query">{{ message }}</a>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </center>
-            {% endif %}
+
             {% block content %}
                 <!-- Masthead-->
                 <header class="masthead">

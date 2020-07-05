@@ -10,6 +10,17 @@
 {% block content %}
     <section class="page-section " id="covid19">
         <div class="container">
+            {% if messages %}<br/><br/><br/>
+                <center>
+                    <div class="col-lg-4 my-3 my-lg-0">
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">
+                              <a href="#query">{{ message }}</a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </center>
+            {% endif %}
             <div class="row align-items-center float-top">
                 <div class="col-lg-4 text-lg-left">
                 </div>
