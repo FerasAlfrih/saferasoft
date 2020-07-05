@@ -15,7 +15,7 @@
             <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
             <!-- Core theme CSS (includes Bootstrap)-->
             <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
-        <title>Saferasoft-{% block title %}{% endblock title %}</title>
+        <title>Saferasoft-{% block title %}Home{% endblock title %}</title>
     </head>
     <body id="page-top" style="background-color: #7b9095">
         <!-- Navigation-->
@@ -38,16 +38,27 @@
                 </div>
             </div>
         </nav>
-        {% block content %}
-        <!-- Masthead-->
-        <header class="masthead">
-            <div class="container">
-                <div class="masthead-subheading">Welcome To Saferasoft!</div>
-                <div class="masthead-heading text-uppercase">It's Nice To Meet You</div>
-                <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#services">Tell Me More</a>
-            </div>
-        </header>
-        {% endblock content %}
+        <div class="container">
+            {% if messages %}
+                <center><br/><br/><br/>
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">
+                          {{ message }}
+                        </div>
+                    {% endfor %}
+                </center>
+            {% endif %}
+            {% block content %}
+                <!-- Masthead-->
+                <header class="masthead">
+                    <div class="container">
+                        <div class="masthead-subheading">Welcome To Saferasoft!</div>
+                        <div class="masthead-heading text-uppercase">It's Nice To Meet You</div>
+                        <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#services">Tell Me More</a>
+                    </div>
+                </header>
+            {% endblock content %}
+        </div>
         <!-- Footer-->
         <footer class="footer py-4">
             <div class="container">

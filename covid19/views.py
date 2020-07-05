@@ -53,7 +53,8 @@ def coInfo(request):
         info = corona.objects.get(country=q)
     except corona.DoesNotExist:
         info = corona.objects.get(country='World')
-        messages.error(request, f'Please check your spelling')
+        messages.warning(request, f'Please check your spelling')
+        q = 'World'
     old = corona.objects.filter()[0]
     old = old.date
 
