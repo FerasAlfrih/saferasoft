@@ -3,6 +3,8 @@ import requests
 from bs4 import BeautifulSoup
 from .models import corona
 from django.contrib import messages
+from .forms import infoForm
+from django_countries.data import COUNTRIES
 
 
 def scraper(request):
@@ -36,6 +38,8 @@ def scraper(request):
 
 
 def coInfo(request):
+
+    form = infoForm
     context = {}
     scraper(request)
 

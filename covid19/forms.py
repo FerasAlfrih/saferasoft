@@ -3,5 +3,5 @@ from django_countries.fields import CountryField
 
 
 class infoForm(forms.Form):
-    country = CountryField().formfield()
+    country = CountryField(blank=True).formfield()
     pass

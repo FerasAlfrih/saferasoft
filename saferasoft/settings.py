@@ -37,8 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #myapps
-    'covid19.apps.Covid19Config'
+    # myapps
+    'covid19.apps.Covid19Config',
+    'django_countries',
+
 ]
 
 MIDDLEWARE = [

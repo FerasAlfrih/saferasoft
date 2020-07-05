@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load countries %}
-{% get_country query as country %}
+{% get_country 'query' as country %}
 {% block title %}
     {% if query %}
         {{ query }}
@@ -33,14 +33,14 @@
                 </div>
                 <div class="col-lg-4 text-lg-right">
                     <form method="GET" id="infoForm" name="infoForm" action="/cov19/Covid19Info/">
-                        {{form.as_p}}
+                        <input class="text-muted" type="search" name="query" id="query" placeholder="Enter a country name">
                         <button class="btn btn-outlin-primary text-primary" type="submit" value="search">Get Info</button>
                     </form>
                 </div>
             </div>
             <div class="row align-items-center float-top">
                 <div class="col-lg-4 text-lg-left">
-                    <img src=" {% static 'flags/{{ contry.code }}.png' %} ">
+                    <img src=" ../../static/flags/{{ country.code }}.png ">
                 </div>
                 <div class="col-lg-4 my-3 my-lg-0">
                     <center>
