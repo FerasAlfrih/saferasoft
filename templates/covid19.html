@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load countries %}
-{% get_country 'query' as country %}
+{% get_country query as country %}
 {% block title %}
     {% if query %}
         {{ query }}
