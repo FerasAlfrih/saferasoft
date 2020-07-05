@@ -1,7 +1,7 @@
 from django import forms
+from django_countries.fields import CountryField
 
 
 class infoForm(forms.Form):
-    country = forms.CharField(max_length=100)
-
+    country = CountryField().formfield()
     pass
