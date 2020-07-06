@@ -59,9 +59,9 @@ def coInfo(request):
         info = corona.objects.get(country='World')
         messages.error(request, f'Please check your spelling')
         q = 'World'
-    If corona.objects.count(country=q) > 1:
-        info=corona.objects.count(country=q)[0]
-        messages.success(request, f"duplicate") 
+    #If corona.objects.count(country=q) > 1:
+        #info=corona.objects.count(country=q)[0]
+        #messages.success(request, f"duplicate") 
     old = corona.objects.filter()[0]
     old = old.date
 
