@@ -59,6 +59,8 @@ def coInfo(request):
         info = corona.objects.get(country='World')
         messages.error(request, f'Please check your spelling')
         q = 'World'
+    If info > 1:
+        info=info[0] 
     old = corona.objects.filter()[0]
     old = old.date
 
