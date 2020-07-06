@@ -60,61 +60,53 @@
         </nav>
       </header>
       <main class="mt-5">
-        <div class="row">
+        <div class="col-6 mt-3">
+          {% if messages %}<br/><br/><br/>
+            <center>
+              <div class="col-lg-4 my-3 my-lg-0">
+                {% for message in messages %}
+                  <div class="alert alert-{{ message.tags }}">
+                    <a href="#query">{{ message }}</a>
+                  </div>
+                {% endfor %}
+              </div>
+            </center>
+          {% endif %}
+        </div>
+        {% block content %}
+        <div class="content row">
           <div class="col">
-
-          </div>
-          <div class="col-6 mt-3">
-            {% if messages %}<br/><br/><br/>
-              <center>
-                <div class="col-lg-4 my-3 my-lg-0">
-                  {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }}">
-                      <a href="#query">{{ message }}</a>
-                    </div>
-                  {% endfor %}
-                </div>
-              </center>
-            {% endif %}
-          </div>
-          {% block content %}
-          <div class="content row">
-            <div class="col">
-              <div class="card bg-mocha" style="width: 18rem;">
-                <img class="card-img-top" src="{% static 'img/5.jpg' %}" alt="Card image cap">
-                <div class="card-body">
-                  <big class="card-title">Card title</big>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card bg-mocha" style="width: 18rem;">
-                <img class="card-img-top" src="{% static 'img/corona.png' %}" alt="Card image cap">
-                <div class="card-body">
-                  <big class="card-title">Coronavirus Updates</big>
-                  <p class="card-text">The latest news about coronaviruse cases from any country you choose.</p>
-                  <a href="{% url 'covid19' %}" class="btn btn-primary">Try it!</a>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card bg-mocha" style="width: 18rem;">
-                <img class="card-img-top" src="{% static 'img/5.jpg' %}" alt="Card image cap">
-                <div class="card-body">
-                  <big class="card-title">Card title</big>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
+            <div class="card bg-mocha" style="width: 18rem;">
+              <img class="card-img-top" src="{% static 'img/5.jpg' %}" alt="Card image cap">
+              <div class="card-body">
+                <big class="card-title">Card title</big>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
               </div>
             </div>
           </div>
-          {% endblock content %}
           <div class="col">
-
+            <div class="card bg-mocha" style="width: 18rem;">
+              <img class="card-img-top" src="{% static 'img/corona.png' %}" alt="Card image cap">
+              <div class="card-body">
+                <big class="card-title">Coronavirus Updates</big>
+                <p class="card-text">The latest news about coronaviruse cases from any country you choose.</p>
+                <a href="{% url 'covid19' %}" class="btn btn-primary">Try it!</a>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card bg-mocha" style="width: 18rem;">
+              <img class="card-img-top" src="{% static 'img/5.jpg' %}" alt="Card image cap">
+              <div class="card-body">
+                <big class="card-title">Card title</big>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
           </div>
         </div>
+        {% endblock content %}
       </main>
       <footer class="mt-5 mb-5">
         <div class="container">
