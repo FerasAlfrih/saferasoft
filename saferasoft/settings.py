@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # myapps
     'covid19.apps.Covid19Config',
+    'base.apps.BaseConfig',
     'django_countries',
     'rest_framework',
 

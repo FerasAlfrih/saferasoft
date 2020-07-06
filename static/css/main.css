@@ -1,104 +1,158 @@
-body {
-    background-color: #6c757d;
-    color: #f8f9fa;
-    font-family: sans-serif;
-    margin-top: 5rem;
+@import "font.css";
+/*font cases*/
+.lowercase {
+  text-transform: lowercase;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+.capitalize {
+  text-transform: capitalize;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    color: #444444;
+/*font colors*/
+.f-gold{
+    color: #EAC117;
+}
+.f-steel{
+    color: #5f788a;
+}
+.f-navy{
+    color: #000080;
+}
+.f-caramel{
+    color: #C68E17;
+}
+.f-coffee{
+    color: #6F4E37;
+}
+.f-mocha{
+    color: #493D26;
+}
+.f-sepia{
+    color: #7F462C;
+}
+.f-valentine{
+    color: #E55451;
+}
+.f-chestnut{
+    color: #954535;
+}
+.f-orchideD{
+    color: #7D1B7E;
+}
+.f-orchideM{
+    color: #B048B5;
+}
+.f-pearl{
+    color: #FDEEF4;
+}
+.f-purpleM{
+    color: #8467D7;
+}
+.f-purple{
+    color: #8E35EF;
+}
+.f-eggplant{
+    color: #614051;
+}
+.f-jasmine{
+    color: #A23BEC;
 }
 
-ul {
-    margin: 0;
+/*background colors*/
+.bg-gold{
+    background-color: #EAC117;
 }
-
-.bg-steel {
+.bg-steel{
     background-color: #5f788a;
 }
-
-.site-header .navbar-nav .nav-link {
-    color: #cbd5db;
+.bg-navy{
+    background-color: #000080;
+}
+.bg-caramel{
+    background-color: #C68E17;
+}
+.bg-coffee{
+    background-color: #6F4E37;
+}
+.bg-mocha{
+    background-color: #493D26;
+}
+.bg-sepia{
+    background-color: #7F462C;
+}
+.bg-valentine{
+    background-color: #E55451;
+}
+.bg-chestnut{
+    background-color: #954535;
+}
+.bg-orchideD{
+    background-color: #7D1B7E;
+}
+.bg-orchideM{
+    background-color: #B048B5;
+}
+.bg-pearl{
+    background-color: #FDEEF4;
+}
+.bg-purpleM{
+    background-color: #8467D7;
+}
+.bg-purple{
+    background-color: #8E35EF;
+}
+.bg-eggplant{
+    background-color: #614051;
+}
+.bg-jasmine{
+    background-color: #A23BEC;
 }
 
-.site-header .navbar-nav .nav-link:hover {
-    color: #ffffff;
+
+/* font types and colors*/
+.text-menu {
+    font-family: 'Crimson Pro', serif;
+    font-size: 20px;
+
+}
+.text-title {
+    text-transform: capitalize;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 40px;
+
+}
+.text-unique {
+    font-family: 'Dancing Script', cursive;
+
+
+}
+.text-paragraph{
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+}
+ .text-signiture {
+    font-family: 'Great Vibes', cursive;
+ }
+.content{
+    padding-top: 10.5rem;
+    padding-bottom: 6rem;
+    /*background-image: url("../img/5.jpg");
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center center;
+    background-size: cover;*/
+}
+p {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: #FDEEF4;
 }
 
-.site-header .navbar-nav .nav-link.active {
-    font-weight: 500;
-}
-
-.content-section {
-    background: #ffffff;
-    padding: 10px 20px;
-    border: 1px solid #dddddd;
-    border-radius: 3px;
-    margin-bottom: 20px;
-}
-
-.article-title {
-    color: #444444;
-}
-
-a.article-title:hover {
-    color: #428bca;
-    text-decoration: none;
-}
-
-.article-content {
-    white-space: pre-line;
-}
-
-.article-img {
-    height: 65px;
-    width: 65px;
-    margin-right: 16px;
-}
-
-.article-metadata {
-    padding-bottom: 1px;
-    margin-bottom: 4px;
-    border-bottom: 1px solid #e3e3e3
-}
-
-.article-metadata a:hover {
-    color: #333;
-    text-decoration: none;
-}
-
-.article-svg {
-    width: 25px;
-    height: 25px;
-    vertical-align: middle;
-}
-
-.account-img {
-    height: 125px;
-    width: 125px;
-    margin-right: 20px;
-    margin-bottom: 16px;
-}
-
-.account-heading {
-    font-size: 2.5rem;
-}
-
-.comment {
-    margin: 20px 0px 20px 20px;
-}
-
- .navbar.transparent.navbar-inverse .navbar-inner {
-    border-width: 0px;
-    -webkit-box-shadow: 0px 0px;
-    box-shadow: 0px 0px;
-    background-color: rgba(0,0,0,0.0);
-    background-image: -webkit-gradient(linear, 50.00% 0.00%, 50.00% 100.00%, color-stop( 0% , rgba(0,0,0,0.00)),color-stop( 100% , rgba(0,0,0,0.00)));
-    background-image: -webkit-linear-gradient(270deg,rgba(0,0,0,0.00) 0%,rgba(0,0,0,0.00) 100%);
-    background-image: linear-gradient(180deg,rgba(0,0,0,0.00) 0%,rgba(0,0,0,0.00) 100%);
+big {
+    color: #5f788a;
+    text-transform: capitalize;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 40px;
 }

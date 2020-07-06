@@ -21,11 +21,11 @@ from . import views as mv
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', mv.base, name="base"),
     path('about/', mv.about, name="about"),
     path('profolio/', mv.profolio, name="profolio"),
     path('team/', mv.team, name="team"),
     path('contact/', mv.contact, name="contact"),
     path('services/', mv.services, name="services"),
-    path('cov19/', include('covid19.urls'))
+    path('cov19/', include('covid19.urls')),
+    path('', include('base.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

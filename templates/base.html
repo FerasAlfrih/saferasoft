@@ -1,85 +1,145 @@
 {% load static %}
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-            <meta name="description" content="" />
-            <meta name="author" content="" />
-            <link rel="icon" type="image/x-icon" href="{% static 'assets/img/favicon.ico' %}" />
-            <!-- Font Awesome icons (free version)-->
-            <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
-            <!-- Google fonts-->
-            <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-            <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
-            <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
-            <!-- Core theme CSS (includes Bootstrap)-->
-            <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
-        <title>Saferasoft-{% block title %}Home{% endblock title %}</title>
-    </head>
-    <body id="page-top" style="background-color: #dbe4eb">
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-            <div class="container">
-                <a class="navbar-brand js-scroll-trigger" href="{% url 'base' %}"><img src="{% static 'img/logo.png' %}" width="200" alt="Saferasoft" /></a>
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu
-                    <i class="fas fa-bars ml-1"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav text-uppercase ml-auto">
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'covid19' %}">Covid19 Info</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'services' %}">Services</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'profolio' %}">Portfolio</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'about' %}">About</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'team' %}">Team</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'contact' %}">Contact</a></li>
-                    </ul>
-                </div>
-            </div>
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- google fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Crimson+Pro:ital@1&family=Great+Vibes&family=Libre+Baskerville:ital@1&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- my styling files -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/socialMedia.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/font.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+
+
+    {% if title %}
+      <title>Saferasoft-{% block title %}{% endblock title %}</title>
+    {% else %}
+      <title>Saferasoft</title>
+    {% endif %}
+  </head>
+  <body class="container bg-chestnut">
+    <div class="container">
+      <header>
+        <nav class="navbar navbar-expand-lg fixed-top">
+          <a class="navbar-brand" href="{% url 'base' %}">
+            <img src="{% static 'img/logo.png' %}" width="200">
+          </a>
+          <button class="navbar-toggler"  type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon">Menu</span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav" >
+              <li class="nav-item">
+                <a class="nav-link js-scroll-trigger text-menu f-gold"href="{% url 'covid19' %}">Covid19 Info</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link js-scroll-trigger text-menu f-gold"href="{% url 'services' %}">Services</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link js-scroll-trigger text-menu f-gold"href="{% url 'profolio' %}">Portfolio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link js-scroll-trigger text-menu f-gold"href="{% url 'about' %}">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link js-scroll-trigger text-menu f-gold"href="{% url 'team' %}">Team</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link js-scroll-trigger text-menu f-gold"href="{% url 'contact' %}">Contact</a>
+              </li>
+            </ul>
+          </div>
         </nav>
-        <div class="container">
+      </header>
+      <main class="mt-5">
+        <div class="row">
+          <div class="col">
 
-            {% block content %}
-                <!-- Masthead-->
-                <header class="masthead">
-                    <div class="container">
-                        <div class="masthead-heading text-primary text-uppercase text-lg-right">
-                            <i>This is Saferasoft!</i>
-                        </div>
-                        <div class="masthead-subheading text-lg-right"><h3>we convert ideas into codes!</h3></div>
-                        <a class="btn btn-outline-primary btn-xl text-uppercase js-scroll-trigger" href="#services">Tell Me More</a>
+          </div>
+          <div class="col-6 mt-3">
+            {% if messages %}<br/><br/><br/>
+              <center>
+                <div class="col-lg-4 my-3 my-lg-0">
+                  {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                      <a href="#query">{{ message }}</a>
                     </div>
-                </header>
-            {% endblock content %}
+                  {% endfor %}
+                </div>
+              </center>
+            {% endif %}
+          </div>
+          {% block content %}
+          <div class="content row">
+            <div class="col">
+              <div class="card bg-mocha" style="width: 18rem;">
+                <img class="card-img-top" src="{% static 'img/5.jpg' %}" alt="Card image cap">
+                <div class="card-body">
+                  <big class="card-title">Card title</big>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card bg-mocha" style="width: 18rem;">
+                <img class="card-img-top" src="{% static 'img/5.jpg' %}" alt="Card image cap">
+                <div class="card-body">
+                  <big class="card-title">Card title</big>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card bg-mocha" style="width: 18rem;">
+                <img class="card-img-top" src="{% static 'img/5.jpg' %}" alt="Card image cap">
+                <div class="card-body">
+                  <big class="card-title">Card title</big>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endblock content %}
+          <div class="col">
+
+          </div>
         </div>
-        <!-- Footer-->
-        <footer class="footer py-4">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-4 text-lg-left">Copyright © Saferasoft 2020</div>
-                    <div class="col-lg-4 my-3 my-lg-0">
-                        <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                    <div class="col-lg-4 text-lg-right">
-                        <a class="mr-3" href="#!">Privacy Policy</a>
-                        <a href="#!">Terms of Use</a>
-                    </div>
+      </main>
+      <footer class="mt-5 mb-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-4 text-lg-left f-caramel">Copyright © Saferasoft 2020</div>
+                <div class="col-lg-4 my-3 my-lg-0">
+                  <center>
+                    <a href="#!" class="fa fa-twitter"></i></a>
+                    <a href="#!" class="fa fa-facebook"></i></a>
+                    <a href="#!" class="fa fa-linkedin"></i></a>
+                  </center>
+                </div>
+                <div class="col-lg-4 text-lg-right">
+                  <a class="mr-3 f-caramel" href="#!">Privacy Policy</a>
+                  <a class=" f-caramel" href="#!">Terms of Use</a>
                 </div>
             </div>
-        </footer>
+        </div>
+      </footer>
+    </div>
 
-          <!-- Bootstrap core JS-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
-        <!-- Third party plugin JS-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-        <!-- Contact form JS-->
-        <script src="{% static 'assets/mail/jqBootstrapValidation.js' %}"></script>
-        <script src="{% static 'assets/mail/contact_me.js' %}"></script>
-        <!-- Core theme JS-->
-        <script src="{% static 'js/scripts.js' %}"></script>
-    </body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
 </html>
