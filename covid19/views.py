@@ -60,7 +60,8 @@ def coInfo(request):
         messages.error(request, f'Please check your spelling')
         q = 'World'
     If info > 1:
-        info=info[0] 
+        info=info[0]
+        messages.success(request, f"duplicate") 
     old = corona.objects.filter()[0]
     old = old.date
 
