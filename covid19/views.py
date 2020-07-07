@@ -5,6 +5,7 @@ from .models import corona
 from django.contrib import messages
 from .forms import infoForm
 from django_countries.data import COUNTRIES
+from django.db import OperationalError
 
 
 def scraper(request):
@@ -48,24 +49,23 @@ def coInfo(request):
     else:
         query = 'world'
 
-    if query == 'usa' or query == 'Usa' or query == 'USa' or query == 'uk' or query == 'Uk' or query == 'uae' or query == 'uAE' or query == 'uaE' or query == 'UAe' or query == 'Uae':
+    if query == 'usa' or query == 'USA' or query == 'Usa' or query == 'USa' or query == 'uSA' or query == 'uk' or query == 'UK' or query == 'Uk' or query == 'uK' or query == 'uae' or query == 'uAE' or query == 'uaE' or query == 'UAe' or query == 'Uae' or query == 'UAE' or query == 'ksa' or query == 'Ksa' or query == 'KSa' or query == 'KSA' or query == 'kSA':
         q = str(query).upper()
     else:
         q = str(query).title()
-    # getting results
-    try:
-        info = corona.objects.get(country=q)
-    except corona.DoesNotExist:
+
+    infos = corona.objects.filter(country=q).count()
+    if infos > 1:
+        info = corona.objects.filter(country=q).order_by('id').first()
+    elif infos == 0:
         info = corona.objects.get(country='World')
-        messages.error(request, f'Please check your spelling')
+        messages.success(request, f'Please check your spelling')
         q = 'World'
-    #If corona.objects.count(country=q) > 1:
-        #info=corona.objects.count(country=q)[0]
-        #messages.success(request, f"duplicate") 
-    old = corona.objects.filter()[0]
-    old = old.date
+    else:
+        info = corona.objects.get(country=q)
 
     context = {
+        'form': form,
         'country': info.country,
         'totalcases': info.totalcases,
         'newcases': info.newcases,

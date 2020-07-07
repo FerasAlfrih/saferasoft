@@ -5,7 +5,7 @@ from django_countries.fields import CountryField
 
 class corona(models.Model):
     """docstring for corona"""
-    country = models.CharField(max_length=100)
+    country = CountryField()
     totalcases = models.CharField(max_length=100)
     newcases = models.CharField(max_length=100)
     totaldeathes = models.CharField(max_length=100)

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load countries %}
-{% get_country query as country %}
+
 {% block title %}
     {% if query %}
         {{ query }}
@@ -10,41 +10,36 @@
     {% endif %}
 {% endblock title %}
 {% block content %}
-    <section class="page-section " id="covid19">
+
+    <section class="page-section mt-5" id="covid19">
         <div class="container">
-            {% if messages %}<br/><br/><br/>
-                <center>
-                    <div class="col-lg-4 my-3 my-lg-0">
-                        {% for message in messages %}
-                            <div class="alert alert-{{ message.tags }}">
-                              <a href="#query">{{ message }}</a>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </center>
-            {% endif %}
-            <div class="row align-items-center float-top">
+            <div class="row align-items-center">
                 <div class="col-lg-4 text-lg-left">
                 </div>
                 <div class="col-lg-4 my-3 my-lg-0">
                     <center>
-                        <h2 class="section-heading text-uppercase"><i>{{ country }}</i></h2>
+                        {% if country == 'World' %}
+                        <h2 class="text-title"><a class=" f-gold" href="https://www.worldometers.info/coronavirus/" target="-blank">{{ country }}</a></h2>
+                        {% else %}
+                        <h2 class="text-title"><a class=" f-gold" href="https://www.worldometers.info/coronavirus/country/{{ country }}" target="-blank">{{ country }}</a></h2>
+                        {% endif %}
                     </center>
                 </div>
                 <div class="col-lg-4 text-lg-right">
                     <form method="GET" id="infoForm" name="infoForm" action="/cov19/Covid19Info/">
                         <input class="text-muted" type="search" name="query" id="query" placeholder="Enter a country name">
+                        {{ form }}
                         <button class="btn btn-outlin-primary text-primary" type="submit" value="search">Get Info</button>
                     </form>
                 </div>
             </div>
             <div class="row align-items-center float-top">
                 <div class="col-lg-4 text-lg-left">
-                    <img src=" ../../static/flags/{{ country.code }}.png ">
+                    <!-- <img src="../../static/flags/.png"> -->
                 </div>
                 <div class="col-lg-4 my-3 my-lg-0">
                     <center>
-                        <h3 class="section-subheading text-muted"><a href="http://www.wikipedia.com/wiki/{{ country }}" target="_blank">Find more about {{ country }} on Wikipedia</a></h3>
+                        <small class="f-eggplant">Find more about <a class="f-navy" href="http://www.wikipedia.com/wiki/{{ country }}" target="_blank">{{ country }}</a> on Wikipedia</small>
                     </center>
                 </div>
                 <div class="col-lg-4 text-lg-right">
@@ -57,36 +52,38 @@
             <center>
                 <div>
                     <span>
-                        <h4>Total Cases:</h4>
-                        <h4 class="text-primary">{{ totalcases }}<small class="text-danger"><b> ({{ newcases }})</b></small></h4><br>
-                    </span>
+                        <h4 class="text-dark">Total Cases</h4>
+                        <h4 class="f-teal">{{ totalcases }}<small class="f-firebrick"><b> ({{ newcases }})</b></small></h4><br>
+                    </span><br>
                     <span>
-                        <h4>Total Deathes:</h4>
-                        <h4 class="text-warning">{{ totaldeathes }}<small class="text-danger"><b> ({{ newdeathes }})</b></small></h4><br>
-                    </span>
+                        <h4 class="text-dark">Total Deathes</h4>
+                        <h4 class="f-teal">{{ totaldeathes }}<small class="f-firebrick"><b> ({{ newdeathes }})</b></small></h4><br>
+                    </span><br>
                 </div>
             </center>
-            <div class="footer py-4">
+            <div class="footer py-4 mt-3">
                 <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-lg-4 text-lg-left">
-                            <h6>Total Recovered:</h6>
-                            <big class="text-light">{{ totalrecovered }}</big>
-                        </div>
-                        <div class="col-lg-4 my-3 my-lg-0">
-                            <h6>Active Cases:</h6>
-                            <big class="text-light">{{ activecases }}</big>
-                        </div>
-                        <div class="col-lg-4 text-lg-right">
-                            <h6>Critical Cases:</h6>
-                            <big class="text-light">{{ criticalcases }}</big>
-                        </div>
+                    <div class="row">
+                        <span class="col-4 text-lg-left ml-5">
+                            <h5 class="text-dark">Total Recovered</h5>
+                            <big class="f-teal">{{ totalrecovered }}</big>
+                        </span>
+                        <center>
+                            <span class=" col-6 my-3 my-lg-0 ml-5">
+                                <h5 class="text-dark">Active Cases</h5>
+                                <big class="f-teal">{{ activecases }}</big>
+                            </span>
+                        </center>
+                        <span class="col-4 text-lg-right ml-5">
+                            <h5 class="text-dark">Critical Cases</h5>
+                            <big class="f-teal">{{ criticalcases }}</big>
+                        </span>
                     </div>
                 </div>
             </div>
              <center>
                 <div class="col-lg-4 my-3 my-lg-0">
-                    <small class="text-muted">All info provided are from <a class="text-muted" target="_blank" href="https://www.worldometers.info/coronavirus/">Worldometer</a></small>
+                    <small class="text-muted">All info provided are from <a class="f-caramel" target="_blank" href="https://www.worldometers.info/coronavirus/">Worldometer</a></small>
                 </div>
             </center>
         </div>

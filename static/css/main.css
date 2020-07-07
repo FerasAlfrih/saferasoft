@@ -59,6 +59,24 @@
 .f-jasmine{
     color: #A23BEC;
 }
+.f-firebrick{
+    color:#800517;
+}
+.f-roseyfinch{
+    color:#7F4E52;
+}
+.f-teal{
+    color: #008080;
+}
+.f-seablue{
+    color:#C2DFFF;
+}
+.f-metalic{
+    color:#BCC6CC;
+}
+.f-bluegray{
+    color:#98AFC7;
+}
 
 /*background colors*/
 .bg-gold{
@@ -109,6 +127,25 @@
 .bg-jasmine{
     background-color: #A23BEC;
 }
+.bg-firebrick{
+    background-color:#800517;
+}
+.bg-roseyfinch{
+    background-color:#7F4E52;
+}
+.bg-teal{
+    background-color: #008080;
+}
+.bg-seablue{
+    background-color:#C2DFFF;
+}
+.bg-metalic{
+    background-color:#BCC6CC;
+}
+.bg-bluegray{
+    background-color:#98AFC7;
+}
+
 
 
 /* font types and colors*/
@@ -151,8 +188,25 @@ p {
 }
 
 big {
-    color: #5f788a;
+
     text-transform: capitalize;
     font-family: 'Libre Baskerville', serif;
-    font-size: 40px;
+    font-size: 25px;
+}
+small {
+
+    text-transform: capitalize;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 15px;
+}
+ h4{
+
+    font-family: 'Libre Baskerville', serif;
+    font-size: 30px;
+ }
+ h5 {
+
+    text-transform: capitalize;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 25px;
 }
