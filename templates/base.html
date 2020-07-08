@@ -74,16 +74,21 @@
           {% endif %}
         </div>
         {% block content %}
-        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-          <div class="carousel-inner" align="center">
+        <div id="carouselExampleControls" class="carousel slide mt-5" data-ride="carousel" align="center">
+          <div class="carousel-inner" >
             <div class="carousel-item active">
-              <img class="d-block w-50" src="{% static 'img/5.jpg' %}" alt="First slide">
+              <a href="{% url 'covid19' %}">
+                <img class="d-block " height="500" width="1000" src="{% static 'img/corona.png' %}" alt="First slide">
+              </a>
             </div>
             <div class="carousel-item">
-              <img class="d-block w-50" src="{% static 'img/5.jpg' %}" alt="Second slide">
+              <img class="d-block" height="500" width="1000" src="{% static 'img/5.jpg' %}" alt="Second slide">
             </div>
             <div class="carousel-item">
-              <img class="d-block w-50" src="{% static 'img/5.jpg' %}" alt="Third slide">
+              <img class="d-block" height="500" width="1000" src="{% static 'img/2.jpg' %}" alt="Third slide">
+            </div>
+            <div class="carousel-item">
+              <img class="d-block" height="500" width="1000" src="{% static 'img/3.jpg' %}" alt="Fourth slide">
             </div>
           </div>
           <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -95,17 +100,7 @@
             <span class="sr-only">Next</span>
           </a>
         </div>
-        <div class="content row">
-          <div class="col">
-            <div class="card bg-mocha" style="width: 18rem;">
-              <img class="card-img-top" src="{% static 'img/5.jpg' %}" alt="Card image cap">
-              <div class="card-body">
-                <big class="card-title">Card title</big>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-              </div>
-            </div>
-          </div>
+        <div class="content row" id="cards">
           <div class="col">
             <div class="card bg-mocha" style="width: 18rem;">
               <img class="card-img-top" src="{% static 'img/corona.png' %}" alt="Card image cap">
@@ -113,6 +108,16 @@
                 <big class="card-title">Coronavirus Updates</big>
                 <p class="card-text">The latest news about coronaviruse cases from any country you choose.</p>
                 <a href="{% url 'covid19' %}" class="btn btn-primary">Try it!</a>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card bg-mocha" style="width: 18rem;">
+              <img class="card-img-top" src="{% static 'img/5.jpg' %}" alt="Card image cap">
+              <div class="card-body">
+                <big class="card-title">Card title</big>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
               </div>
             </div>
           </div>

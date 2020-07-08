@@ -53,6 +53,8 @@ def coInfo(request):
         q = str(query).upper()
     else:
         q = str(query).title()
+    if q == 'KSA':
+        q= 'Saudi Arabia'
 
     infos = corona.objects.filter(country=q).count()
     if infos > 1:
