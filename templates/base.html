@@ -6,6 +6,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=YES">
 
+    <!-- SEO meta tags -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+    <META NAME="geo.position" CONTENT="latitude; longitude">
+    <META NAME="geo.placename" CONTENT="Place Name">
+    <META NAME="geo.region" CONTENT="Country Subdivision Code">
+    {% block meta %}
+    <meta name="description" content="A freelance programming company with a great team of programmers in many languages">
+    <meta name="og:title" property="og:title" content="Saferasoft: We transform your idea into a code">
+
+    {% endblock meta %}
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -15,7 +27,6 @@
 
     <!-- my styling files -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/socialMedia.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/font.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 
 
@@ -75,6 +86,7 @@
         </div>
         {% block content %}
         <div id="carouselExampleIndicators" class="carousel slide mt-5" data-ride="carousel">
+          <h3 class="f-mocha">Brought to you by <a class="bg-mocha f-pearl" href="http://news.sky.com/technology">SkyNews</a></h3>
           <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>

@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load countries %}
+{% block meta %}
+    <meta name="description" content="The latest news about coronaviruse cases from any country you choose">
+    <meta name="og:title" property="og:title" content="Saferasoft: We transform your idea into a code">
 
+    {% endblock meta %}
 {% block title %}
     {% if query %}
         {{ query }}
