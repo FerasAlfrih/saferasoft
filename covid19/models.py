@@ -1,11 +1,12 @@
 from django.db import models
-from django_countries.fields import CountryField
+
 # Create your models here.
 
 
 class corona(models.Model):
     """docstring for corona"""
-    country = CountryField()
+
+    country = models.CharField(max_length=100)
     totalcases = models.CharField(max_length=100)
     newcases = models.CharField(max_length=100)
     totaldeathes = models.CharField(max_length=100)

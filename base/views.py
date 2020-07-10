@@ -1,7 +1,11 @@
 from django.shortcuts import render
 from bs4 import BeautifulSoup
 import requests
-from .models import techNews
+from .models import techNews, countryList
+from django.contrib import messages
+import os
+from saferasoft.settings import BASE_DIR
+import csv
 
 
 def NewsScraper(request):
