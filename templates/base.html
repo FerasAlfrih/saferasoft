@@ -28,7 +28,10 @@
     <!-- my styling files -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/socialMedia.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
-
+    <!-- FAVICON -->
+    {% block favicon %}
+    <link rel="icon" type="icon" href="{% static 'img/favicon.ico' %}">
+    {% endblock favicon %}
 
     {% if title %}
       <title>Saferasoft-{% block title %}{% endblock title %}</title>
