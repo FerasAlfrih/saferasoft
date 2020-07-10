@@ -43,7 +43,7 @@ def coInfo(request):
 
     form = infoForm
     context = {}
-    # scraper(request)
+    scraper(request)
     lang = get_language()
     loc = to_locale(lang)
     if request.GET.get('query'):
