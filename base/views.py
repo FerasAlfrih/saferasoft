@@ -46,6 +46,6 @@ def base(request):
   }
 
   if lang == 'ar':
-    return render(request, 'saferasoft/ar/base.html', context)
+    return render(request, 'ar/base.html', context)
   else:
-    return render(request, 'saferasoft/base.html', context)
+    return render(request, 'base.html', context)
