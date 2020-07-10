@@ -50,7 +50,7 @@ def coInfo(request):
 
     form = infoForm
     context = {}
-    scraper(request)
+    # scraper(request)
 
     if request.GET.get('query'):
         query = request.GET.get('query')
@@ -93,7 +93,16 @@ def coInfo(request):
 
     code = countryList.objects.get(name=q)
     code = str(code.code).lower()
-
+    lvl = 0
+    if info.totalrecovered == info.totalcases:
+        lvl = 2
+    elif info.activecases == '0' and info.totaldeathes != '0':
+        lvl = 1
+    else:
+        lvl = 0
+    print(lvl)
+    print(info.activecases)
+    print(info.totaldeathes)
     context = {
         'form': form,
         'country': info.country,
@@ -107,6 +116,7 @@ def coInfo(request):
         'date': info.date,
         'code': code,
         'fn': fn,
+        'lvl': lvl,
         'query': q,
 
     }

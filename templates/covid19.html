@@ -17,11 +17,17 @@
     {% endif %}
 {% endblock title %}
 {% block content %}
-
-    <section class="page-section mt-5" id="covid19">
+    <section class="page-section mt-5" id="covid19" >
+        {% if lvl == 2 %}
+        <div class="container" style="background-color: LightGreen;">
+        {% elif lvl == 1 %}
+        <div class="container" style="background-color: LightGray;">
+        {% else %}
         <div class="container">
+        {% endif %}
             <div class="row align-items-center">
                 <div class="col-lg-4 text-lg-left">
+                  <img src="../../static/flags/{{code}}.png" width="100" alt="Keep distance from others, for your and their safety" title="Keep distance from others, for your and their safety">
                 </div>
                 <div class="col-lg-4 my-3 my-lg-0">
                     <center>
@@ -42,7 +48,7 @@
             </div>
             <div class="row align-items-center float-top">
                 <div class="col-lg-4 text-lg-left">
-                    <img src="../../static/flags/{{code}}.png" width="100">
+
                 </div>
                 <div class="col-lg-4 my-3 my-lg-0">
                     <center>
@@ -52,6 +58,13 @@
                 <div class="col-lg-4 text-lg-right">
 
                 </div>
+            </div>
+            <div align="center">
+                {% if lvl == 2 %}
+                <h5 style="color: green">This country has no more cases and no death cases</h5>
+                {% elif lvl == 1 %}
+                <h5 style="color: gray">This country has no more cases but it has at least a death case  </h5>
+                {% endif %}
             </div>
             <hr class="bg-light">
             <br/>
