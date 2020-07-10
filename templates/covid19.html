@@ -5,7 +5,10 @@
     <meta name="description" content="The latest news about coronaviruse cases from any country you choose">
     <meta name="og:title" property="og:title" content="Saferasoft: We transform your idea into a code">
 
-    {% endblock meta %}
+{% endblock meta %}
+{% block favicon %}
+    <link rel="icon" type="icon" href="{% static 'img/covid19.ico' %}">
+{% endblock favicon %}
 {% block title %}
     {% if query %}
         {{ query }}
