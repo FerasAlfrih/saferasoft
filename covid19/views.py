@@ -5,7 +5,7 @@ from .models import corona
 from base.models import countryList
 from django.contrib import messages
 from .forms import infoForm
-from django.utils.translation import get_language, to_locale
+from django.utils.translation import get_language_from_request, to_locale
 
 
 def scraper(request):
@@ -44,7 +44,7 @@ def coInfo(request):
     form = infoForm
     context = {}
     scraper(request)
-    lang = get_language()
+    lang = get_language_from_request(request)
     loc = to_locale(lang)
     if request.GET.get('query'):
         query = request.GET.get('query')
