@@ -100,7 +100,7 @@ def coInfo(request):
     context = {
         'form': form,
         'lang': lang,
-        'loc': loc;
+        'loc': loc,
         'country': info.country,
         'totalcases': info.totalcases,
         'newcases': info.newcases,
