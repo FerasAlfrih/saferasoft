@@ -6,6 +6,7 @@ from django.contrib import messages
 import os
 from saferasoft.settings import BASE_DIR
 import csv
+from django.utils.translation import get_language_from_request
 
 
 def NewsScraper(request):
@@ -34,12 +35,17 @@ def base(request):
   info3 = techNews.objects.order_by('id')[2]
   info4 = techNews.objects.order_by('id')[3]
   info5 = techNews.objects.order_by('id')[4]
-
+  lang = get_language_from_request(request)
   context = {
       'info1': info1,
       'info2': info2,
       'info3': info3,
       'info4': info4,
       'info5': info5,
+      'lang': lang,
   }
-  return render(request, 'base.html', context)
+
+  if lang == 'ar':
+    return render(request, 'saferasoft/ar/base.html', context)
+  else:
+    return render(request, 'saferasoft/base.html', context)

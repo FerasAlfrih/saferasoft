@@ -45,7 +45,7 @@ def coInfo(request):
     context = {}
     scraper(request)
     lang = get_language_from_request(request)
-    loc = to_locale(lang)
+
     if request.GET.get('query'):
         query = request.GET.get('query')
     else:
@@ -100,7 +100,7 @@ def coInfo(request):
     context = {
         'form': form,
         'lang': lang,
-        'loc': loc,
+
         'country': info.country,
         'totalcases': info.totalcases,
         'newcases': info.newcases,
@@ -116,5 +116,7 @@ def coInfo(request):
         'query': q,
 
     }
-
-    return render(request, 'covid19/covid19.html', context)
+    if lang == 'ar':
+        return render(request, 'ar/covid19/covid19.html', context)
+    else:
+        return render(request, 'covid19/covid19.html', context)
