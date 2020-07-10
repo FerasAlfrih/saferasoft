@@ -94,8 +94,7 @@ def coInfo(request):
         lvl = 1
     else:
         lvl = 0
-    print(lang)
-    print(loc)
+
 
     context = {
         'form': form,
