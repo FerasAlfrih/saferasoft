@@ -50,7 +50,7 @@ def coInfo(request):
 
     form = infoForm
     context = {}
-    # scraper(request)
+    scraper(request)
 
     if request.GET.get('query'):
         query = request.GET.get('query')
