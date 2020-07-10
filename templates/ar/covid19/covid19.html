@@ -2,14 +2,14 @@
 {% load static %}
 {% load countries %}
 {% block meta %}
-    <meta name="description" content="ยฮั ‘อีวมวส วแ฿ๆัๆไว อๆแ วแฺวแใ ">
-    <meta name="og:title" property="og:title" content="ำวÝํัวำๆÝส: ไอๆ๘แ รÝ฿วั฿ ลแ์ ร฿ๆวฯ">
+    <meta name="description" content="ุขุฎุฑ ู…ุณุชุฌุฏุงุช ุงูููุฑููุง ูู ุงูุนุงูู…">
+    <meta name="og:title" property="og:title" content="ุณุงููุฑุงุณููุช: ูุญูู‘ู ุฃููุงุฑู ุฅูู ุฃููุงุฏ">
 
 {% endblock meta %}
 {% block favicon %}
     <link rel="icon" type="icon" href="{% static 'img/covid19.ico' %}">
 {% endblock favicon %}
-{% block title %}ใำสฬฯวส วแ฿ๆัๆไว{% endblock title %}
+{% block title %}ู…ุณุชุฌุฏุงุช ุงูููุฑููุง{% endblock title %}
 {% block content %}
     <section class="page-section mt-5" id="covid19" >
         {% if lvl == 2 %}
@@ -21,7 +21,7 @@
         {% endif %}
             <div class="row align-items-center">
                 <div class="col-lg-4 text-lg-left">
-                  <img src="../../static/flags/{{code}}.png" width="100" alt="อวÝู ฺแ์ วแสศวฺฯ วแวฬสใวฺํ แำแวใส฿ ๆำแวใษ วแยฮัํไ">
+                  <img src="../../static/flags/{{code}}.png" width="100" alt="ุฎููู ุจุงูุจูุช">
                 </div>
                 <div class="col-lg-4 my-3 my-lg-0">
                     <center>
@@ -35,8 +35,8 @@
                 </div>
                 <div class="col-lg-4 text-lg-right">
                     <form method="GET" id="infoForm" name="infoForm" action="/cov19/Covid19Info/">
-                        <input class="text-muted" type="search" name="query" id="query" placeholder="รฯฮแ วำใ วแฯๆแษ">
-                        <button class="btn btn-outline-warning" type="submit" value="search">Get Info</button>
+                        <input class="text-muted" type="search" name="query" id="query" placeholder="ุงุฏุฎู ุงุณู… ุงูุฏููุฉ">
+                        <button class="btn btn-outline-warning" type="submit" value="search">ุจุญุซ</button>
                     </form>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                 </div>
                 <div class="col-lg-4 my-3 my-lg-0">
                     <center>
-                        <small class="f-eggplant">วแใาํฯ ใไ วแใฺแๆใวส ฺไ <a class="f-navy" href="http://www.wikipedia.com/wiki/{{ fn }}" target="_blank">{{ country }}</a> ฺแ์ ๆํ฿ํศฯํว</small>
+                        <small class="f-eggplant">ุงูุฑุฃ ุงูู…ุฒูุฏ ุนู  <a class="f-navy" href="http://www.wikipedia.com/wiki/{{ fn }}" target="_blank">{{ country }}</a> ูู ููููุจุฏูุง</small>
                     </center>
                 </div>
                 <div class="col-lg-4 text-lg-right">
@@ -55,9 +55,9 @@
             </div>
             <div align="center">
                 {% if lvl == 2 %}
-                <h5 style="color: green">ๅะๅ วแฯๆแษ สฮแีส ใไ วแÝํัๆำ ศฯๆไ สำฬํแ รํ ๆÝํวส</h5>
+                <h5 style="color: green">ูุฐู ุงูุฏููุฉ ุชุฎูุตุช ู…ู ุงูููุฑูุณ ุจุฏูู ุฃู ูููุงุช</h5>
                 {% elif lvl == 1 %}
-                <h5 style="color: gray">ๅะๅ วแฯๆแษ สฮแีส ใไ วแÝํัๆำ ใฺ สำฬํแ อวแษ ๆÝวษ ฺแ์ วแรÞแ</h5>
+                <h5 style="color: gray">ูุฐู ุงูุฏููุฉ ุชุฎูุตุช ู…ู ุงูููุฑูุณ ู…ุน ุชุณุฌูู ูููุฉ ูุงุญุฏุฉ ุนูู ุงูุฃูู</h5>
                 {% endif %}
             </div>
             <hr class="bg-light">
@@ -66,11 +66,11 @@
             <center>
                 <div>
                     <span>
-                        <h4 class="text-dark">ลฬใวแํ วแอวแวส</h4>
+                        <h4 class="text-dark">ุฅุฌู…ุงูู ุงูุฅุตุงุจุงุช</h4>
                         <h4 class="f-teal">{{ totalcases }}<small class="f-firebrick"><b> ({{ newcases }})</b></small></h4><br>
                     </span><br>
                     <span>
-                        <h4 class="text-dark">ลฬใวแํ วแๆÝํวส</h4>
+                        <h4 class="text-dark">ุฅุฌู…ุงูู ุงููููุงุช</h4>
                         <h4 class="f-teal">{{ totaldeathes }}<small class="f-firebrick"><b> ({{ newdeathes }})</b></small></h4><br>
                     </span><br>
                 </div>
@@ -79,17 +79,17 @@
                 <div class="container">
                     <div class="row">
                         <span class="col-4 text-lg-left ml-5">
-                            <h5 class="text-dark">ลฬใวแํ วแิÝวมวส</h5>
+                            <h5 class="text-dark">ุญุงูุงุช ุงูุชุนุงูู</h5>
                             <big class="f-teal">{{ totalrecovered }}</big>
                         </span>
                         <center>
                             <span class=" col-6 my-3 my-lg-0 ml-5">
-                                <h5 class="text-dark">วแอวแวส วแไิุษ วแใสศÞํษ</h5>
+                                <h5 class="text-dark">ุงูุญุงูุงุช ุงููุดุทุฉ</h5>
                                 <big class="f-teal">{{ activecases }}</big>
                             </span>
                         </center>
                         <span class="col-4 text-lg-right ml-5">
-                            <h5 class="text-dark">วแอวแวส วแอัฬษ</h5>
+                            <h5 class="text-dark">ุงูุญุงูุงุช ุงูุญุฑุฌุฉ</h5>
                             <big class="f-teal">{{ criticalcases }}</big>
                         </span>
                     </div>
@@ -97,7 +97,7 @@
             </div>
              <center>
                 <div class="col-lg-4 my-3 my-lg-0">
-                    <small class="text-muted">฿แ วแใฺแๆใวส Ýํ ๅะๅ วแีÝอษ ใรฮๆะษ ใไ <a class="f-caramel" target="_blank" href="https://www.worldometers.info/coronavirus/">Worldometer</a></small>
+                    <small class="text-muted">ุฌู…ูุน ุงูู…ุนููู…ุงุช ูู ูุฐู ุงูุตูุญุฉ ู…ู ู…ููุน <a class="f-caramel" target="_blank" href="https://www.worldometers.info/coronavirus/">Worldometer</a></small>
                 </div>
             </center>
         </div>
