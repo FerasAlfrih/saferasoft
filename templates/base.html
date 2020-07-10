@@ -33,11 +33,9 @@
     <link rel="icon" type="icon" href="{% static 'img/favicon.ico' %}">
     {% endblock favicon %}
 
-    {% if title %}
-      <title>Saferasoft-{% block title %}{% endblock title %}</title>
-    {% else %}
-      <title>Saferasoft</title>
-    {% endif %}
+
+      <title>{% block title %}Saferasoft{% endblock title %}</title>
+
   </head>
   <body class="container bg-pearl">
     <div class="container">

@@ -9,13 +9,7 @@
 {% block favicon %}
     <link rel="icon" type="icon" href="{% static 'img/covid19.ico' %}">
 {% endblock favicon %}
-{% block title %}
-    {% if query %}
-        {{ query }}
-    {% else %}
-        World
-    {% endif %}
-{% endblock title %}
+{% block title %}Coronavirus Updates{% endblock title %}
 {% block content %}
     <section class="page-section mt-5" id="covid19" >
         {% if lvl == 2 %}
