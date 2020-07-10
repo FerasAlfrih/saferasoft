@@ -5,20 +5,20 @@ from django.shortcuts import render
 
 
 def about(request):
-    return render(request, 'about.html')
+    return render(request, 'saferasoft/about.html')
 
 
 def profolio(request):
-    return render(request, 'profolio.html')
+    return render(request, 'saferasoft/profolio.html')
 
 
 def contact(request):
-    return render(request, 'contact.html')
+    return render(request, 'saferasoft/contact.html')
 
 
 def services(request):
-    return render(request, 'services.html')
+    return render(request, 'saferasoft/services.html')
 
 
 def team(request):
-    return render(request, 'team.html')
+    return render(request, 'saferasoft/team.html')

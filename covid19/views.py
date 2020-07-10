@@ -5,14 +5,7 @@ from .models import corona
 from base.models import countryList
 from django.contrib import messages
 from .forms import infoForm
-from django_countries.data import COUNTRIES
-from django.db import OperationalError
-from django_countries.fields import CountryDescriptor
-
-
-def cleanCountry(self):
-    country = self.cleaned_data['country']
-    return country
+from django.utils.translation import get_language, to_locale
 
 
 def scraper(request):
@@ -50,8 +43,9 @@ def coInfo(request):
 
     form = infoForm
     context = {}
-    scraper(request)
-
+    # scraper(request)
+    lang = get_language()
+    loc = to_locale(lang)
     if request.GET.get('query'):
         query = request.GET.get('query')
     else:
@@ -100,11 +94,13 @@ def coInfo(request):
         lvl = 1
     else:
         lvl = 0
-    print(lvl)
-    print(info.activecases)
-    print(info.totaldeathes)
+    print(lang)
+    print(loc)
+
     context = {
         'form': form,
+        'lang': lang,
+        'loc': loc;
         'country': info.country,
         'totalcases': info.totalcases,
         'newcases': info.newcases,
@@ -121,4 +117,4 @@ def coInfo(request):
 
     }
 
-    return render(request, 'covid19.html', context)
+    return render(request, 'covid19/covid19.html', context)
