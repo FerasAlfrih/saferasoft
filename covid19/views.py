@@ -8,7 +8,7 @@ from django.utils.translation import get_language_from_request, to_locale
 from saferasoft.settings import BASE_DIR
 import os
 import csv
-from saferasoft.views import mobileDetector
+from saferasoft.views import is_mobile
 
 
 def scraper(request):
@@ -81,7 +81,7 @@ def coInfo(request):
     context = {}
     scraper(request)
     # listUpdate()
-    #csvUploader(request)
+    # csvUploader(request)
     lang = get_language_from_request(request)
 
     if request.GET.get('query'):
@@ -150,7 +150,7 @@ def coInfo(request):
         'query': q,
 
     }
-    if is_mobile:
+    if is_mobile(request):
         if lang == 'ar':
             return render(request, 'm/ar/covid19/covid19.html', context)
         else:

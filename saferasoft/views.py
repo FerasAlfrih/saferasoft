@@ -45,15 +45,13 @@ def team(request):
     else:
         return render(request, 'saferasoft/team.html')
 
-def mobileDetector(request):
+def is_mobile(request):
 
-
-# """Return True if the request comes from a mobile device."""
+    # """Return True if the request comes from a mobile device."""
 
     MOBILE_AGENT_RE = re.compile(r".*(iphone|mobile|androidtouch)", re.IGNORECASE)
 
-    is_mobile = False
     if MOBILE_AGENT_RE.match(request.META['HTTP_USER_AGENT']):
-        is_mobile = True
+        return True
     else:
-        is_mobile = False
+        return False
