@@ -1,11 +1,14 @@
 from django.shortcuts import render
 import requests
 from bs4 import BeautifulSoup
-from .models import corona
+from .models import corona, worldCountries, arabicCountries
 from base.models import countryList
 from django.contrib import messages
-from .forms import infoForm
 from django.utils.translation import get_language_from_request, to_locale
+from saferasoft.settings import BASE_DIR
+import os
+import csv
+from saferasoft.views import mobileDetector
 
 
 def scraper(request):
@@ -39,11 +42,46 @@ def scraper(request):
         cu.save()
 
 
+def listUpdate():
+    worldCountries.objects.all().delete()
+    countries = []
+    countries = corona.objects.all()
+    for country in countries:
+        name = country.country
+        if countryList.objects.filter(name=name).count() > 0:
+            code = countryList.objects.get(name=name)
+            code = str(code.code).lower()
+        else:
+            code = ""
+        wc = worldCountries(name=name,
+                            code=code,
+                            )
+        wc.save()
+
+
+def csvUploader(request):
+    arabicCountries.objects.all().delete()
+    path = os.path.join(BASE_DIR, 'static/csv/el/countries.csv')
+    with open(path) as f:
+        lines = f.readlines()[1:1000000000]
+        reader = csv.reader(lines)
+
+        for row in reader:
+            _, created = arabicCountries.objects.get_or_create(
+                code=row[2],
+                grname=row[1],
+
+
+            )
+        messages.success(request, f"Data from csv file has been added successfully")
+
+
 def coInfo(request):
 
-    form = infoForm
     context = {}
-    scraper(request)
+    # scraper(request)
+    # listUpdate()
+    csvUploader(request)
     lang = get_language_from_request(request)
 
     if request.GET.get('query'):
@@ -85,7 +123,7 @@ def coInfo(request):
     else:
         info = corona.objects.get(country=q)
 
-    code = countryList.objects.get(name=q)
+    code = worldCountries.objects.get(name=q)
     code = str(code.code).lower()
     lvl = 0
     if info.totalrecovered == info.totalcases:
@@ -95,11 +133,8 @@ def coInfo(request):
     else:
         lvl = 0
 
-
     context = {
-        'form': form,
         'lang': lang,
-
         'country': info.country,
         'totalcases': info.totalcases,
         'newcases': info.newcases,
@@ -115,7 +150,13 @@ def coInfo(request):
         'query': q,
 
     }
-    if lang == 'ar':
-        return render(request, 'ar/covid19/covid19.html', context)
+    if is_mobile:
+        if lang == 'ar':
+        return render(request, 'm/ar/covid19/covid19.html', context)
+        else:
+            return render(request, 'm/covid19/covid19.html', context)
     else:
-        return render(request, 'covid19/covid19.html', context)
+        if lang == 'ar':
+            return render(request, 'ar/covid19/covid19.html', context)
+        else:
+            return render(request, 'covid19/covid19.html', context)

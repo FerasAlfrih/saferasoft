@@ -18,3 +18,32 @@ class corona(models.Model):
 
     def __str__(self):
         return (self.country)
+
+
+class worldCountries(models.Model):
+    name = models.CharField(max_length=100)
+    arname = models.CharField(max_length=100, default="")
+    dename = models.CharField(max_length=100, default="")
+    frname = models.CharField(max_length=100, default="")
+    grname = models.CharField(max_length=100, default="")
+    esname = models.CharField(max_length=100, default="")
+    runame = models.CharField(max_length=100, default="")
+    code = models.CharField(max_length=2)
+    call = models.CharField(max_length=4)
+
+    def __str__(self):
+        return (self.name)
+
+
+class arabicCountries(models.Model):
+    name = models.CharField(max_length=100)
+    dename = models.CharField(max_length=100, default="")
+    frname = models.CharField(max_length=100, default="")
+    grname = models.CharField(max_length=100, default="")
+    esname = models.CharField(max_length=100, default="")
+    runame = models.CharField(max_length=100, default="")
+    code = models.CharField(max_length=2)
+    call = models.CharField(max_length=4)
+
+    def __str__(self):
+        return (self.code)

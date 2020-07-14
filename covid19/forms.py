@@ -1,10 +1,12 @@
 from django import forms
-from django_countries.widgets import CountrySelectWidget
+
 from . import models
 
 
 class infoForm(forms.Form):
+    country = forms.CharField()
+    code = forms.CharField()
+
     class Meta:
-        model = models.corona
-        fields = ('country')
-        widgets = {'country': CountrySelectWidget()}
+        model = models.worldCountries
+        fields = ('country', 'code')
