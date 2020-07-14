@@ -80,22 +80,22 @@ def coInfo(request):
         info = corona.objects.filter(country=q).order_by('id').first()
     elif infos == 0:
 
-        if worldCountries.objects.get(arname=q):
+        if worldCountries.objects.filter(arname=q):
             x = worldCountries.objects.get(arname=q)
             info = corona.objects.get(country=x.name)
-        elif worldCountries.objects.get(frname=q):
+        elif worldCountries.objects.filter(frname=q):
             x = worldCountries.objects.get(frname=q)
             info = corona.objects.get(country=x.name)
-        elif worldCountries.objects.get(grname=q):
+        elif worldCountries.objects.filter(grname=q):
             x = worldCountries.objects.get(grname=q)
             info = corona.objects.get(country=x.name)
-        elif worldCountries.objects.get(dename=q):
+        elif worldCountries.objects.filter(dename=q):
             ix = worldCountries.objects.get(dename=q)
             info = corona.objects.get(country=x.name)
-        elif worldCountries.objects.get(esname=q):
+        elif worldCountries.objects.filter(esname=q):
             x = worldCountries.objects.get(esname=q)
             info = corona.objects.get(country=x.name)
-        elif worldCountries.objects.get(runame=q):
+        elif worldCountries.objects.filter(runame=q):
             x = worldCountries.objects.get(runame=q)
             info = corona.objects.get(country=x.name)
         else:
