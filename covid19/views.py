@@ -2,15 +2,10 @@ from django.shortcuts import render
 import requests
 from bs4 import BeautifulSoup
 from .models import corona, worldCountries, arabicCountries
-from base.models import countryList
 from django.contrib import messages
 from django.utils.translation import get_language_from_request, to_locale
-from saferasoft.settings import BASE_DIR
-import os
-import csv
 from saferasoft.views import is_mobile
-import openpyxl
-from openpyxl import Workbook
+
 
 
 def scraper(request):
