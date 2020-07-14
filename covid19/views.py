@@ -90,7 +90,7 @@ def coInfo(request):
             x = worldCountries.objects.get(grname=q)
             info = corona.objects.get(country=x.name)
         elif worldCountries.objects.filter(dename=q):
-            ix = worldCountries.objects.get(dename=q)
+            x = worldCountries.objects.get(dename=q)
             info = corona.objects.get(country=x.name)
         elif worldCountries.objects.filter(esname=q):
             x = worldCountries.objects.get(esname=q)
