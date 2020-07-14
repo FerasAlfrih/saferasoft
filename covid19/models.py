@@ -29,7 +29,7 @@ class worldCountries(models.Model):
     esname = models.CharField(max_length=100, default="")
     runame = models.CharField(max_length=100, default="")
     code = models.CharField(max_length=2)
-    call = models.CharField(max_length=4)
+    call = models.CharField(max_length=4, default="0")
 
     def __str__(self):
         return (self.name)

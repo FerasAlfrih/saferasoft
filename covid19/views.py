@@ -9,6 +9,8 @@ from saferasoft.settings import BASE_DIR
 import os
 import csv
 from saferasoft.views import is_mobile
+import openpyxl
+from openpyxl import Workbook
 
 
 def scraper(request):
@@ -42,46 +44,11 @@ def scraper(request):
         cu.save()
 
 
-def listUpdate():
-    worldCountries.objects.all().delete()
-    countries = []
-    countries = corona.objects.all()
-    for country in countries:
-        name = country.country
-        if countryList.objects.filter(name=name).count() > 0:
-            code = countryList.objects.get(name=name)
-            code = str(code.code).lower()
-        else:
-            code = ""
-        wc = worldCountries(name=name,
-                            code=code,
-                            )
-        wc.save()
-
-
-def csvUploader(request):
-    arabicCountries.objects.all().delete()
-    path = os.path.join(BASE_DIR, 'static/csv/el/countries.csv')
-    with open(path) as f:
-        lines = f.readlines()[1:1000000000]
-        reader = csv.reader(lines)
-
-        for row in reader:
-            _, created = arabicCountries.objects.get_or_create(
-                code=row[2],
-                grname=row[1],
-
-
-            )
-        messages.success(request, f"Data from csv file has been added successfully")
-
-
 def coInfo(request):
 
     context = {}
-    scraper(request)
-    # listUpdate()
-    # csvUploader(request)
+    # scraper(request)
+
     lang = get_language_from_request(request)
 
     if request.GET.get('query'):
@@ -117,13 +84,46 @@ def coInfo(request):
     if infos > 1:
         info = corona.objects.filter(country=q).order_by('id').first()
     elif infos == 0:
-        info = corona.objects.get(country='World')
-        messages.success(request, f'Please check your spelling')
-        q = 'World'
+
+        if worldCountries.objects.get(arname=q):
+            x = worldCountries.objects.get(arname=q)
+            info = corona.objects.get(country=x.name)
+        elif worldCountries.objects.get(frname=q):
+            x = worldCountries.objects.get(frname=q)
+            info = corona.objects.get(country=x.name)
+        elif worldCountries.objects.get(grname=q):
+            x = worldCountries.objects.get(grname=q)
+            info = corona.objects.get(country=x.name)
+        elif worldCountries.objects.get(dename=q):
+            ix = worldCountries.objects.get(dename=q)
+            info = corona.objects.get(country=x.name)
+        elif worldCountries.objects.get(esname=q):
+            x = worldCountries.objects.get(esname=q)
+            info = corona.objects.get(country=x.name)
+        elif worldCountries.objects.get(runame=q):
+            x = worldCountries.objects.get(runame=q)
+            info = corona.objects.get(country=x.name)
+        else:
+            info = corona.objects.get(country='World')
+            messages.success(request, f'Please check your spelling')
+            q = 'World'
     else:
         info = corona.objects.get(country=q)
 
-    code = worldCountries.objects.get(name=q)
+    if worldCountries.objects.filter(name=q):
+        code = worldCountries.objects.get(name=q)
+    elif worldCountries.objects.filter(arname=q):
+        code = worldCountries.objects.get(arname=q)
+    elif worldCountries.objects.filter(grname=q):
+        code = worldCountries.objects.get(grname=q)
+    elif worldCountries.objects.filter(frname=q):
+        code = worldCountries.objects.get(frname=q)
+    elif worldCountries.objects.filter(dename=q):
+        code = worldCountries.objects.get(dename=q)
+    elif worldCountries.objects.filter(esname=q):
+        code = worldCountries.objects.get(esname=q)
+    elif worldCountries.objects.filter(runame=q):
+        code = worldCountries.objects.get(runame=q)
     code = str(code.code).lower()
     lvl = 0
     if info.totalrecovered == info.totalcases:
