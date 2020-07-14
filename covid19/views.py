@@ -79,9 +79,9 @@ def csvUploader(request):
 def coInfo(request):
 
     context = {}
-    # scraper(request)
+    scraper(request)
     # listUpdate()
-    csvUploader(request)
+    #csvUploader(request)
     lang = get_language_from_request(request)
 
     if request.GET.get('query'):
