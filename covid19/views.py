@@ -152,7 +152,7 @@ def coInfo(request):
     }
     if is_mobile:
         if lang == 'ar':
-        return render(request, 'm/ar/covid19/covid19.html', context)
+            return render(request, 'm/ar/covid19/covid19.html', context)
         else:
             return render(request, 'm/covid19/covid19.html', context)
     else:

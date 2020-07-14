@@ -48,7 +48,7 @@ def team(request):
 def mobileDetector(request):
 
 
-"""Return True if the request comes from a mobile device."""
+# """Return True if the request comes from a mobile device."""
 
     MOBILE_AGENT_RE = re.compile(r".*(iphone|mobile|androidtouch)", re.IGNORECASE)
 
