@@ -47,7 +47,7 @@ def scraper(request):
 def coInfo(request):
 
     context = {}
-    # scraper(request)
+    scraper(request)
 
     lang = get_language_from_request(request)
 
