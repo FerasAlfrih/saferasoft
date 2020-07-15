@@ -13,7 +13,7 @@ def about(request):
    # else:
     #    return render(request, 'saferasoft/about.html')
 
-return render(request, 'soon.html')
+     return render(request, 'soon.html')
 
 def profolio(request):
     return render(request, 'soon.html')
