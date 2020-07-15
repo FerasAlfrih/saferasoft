@@ -87,7 +87,7 @@
         </div>
         {% block content %}
         <div id="carouselExampleIndicators" class="carousel slide mt-5" data-ride="carousel">
-          <h3 class="f-mocha">Brought to you by <a class="bg-mocha f-pearl" href="http://news.sky.com/technology">SkyNews</a></h3>
+          <h3 class="f-mocha">Brought to you from <a class="bg-mocha f-pearl" href="http://news.sky.com/technology">SkyNews</a></h3>
           <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -169,7 +169,7 @@
               <div class="card-body">
                 <big class="card-title">Freelance Jobs</big>
                 <p class="card-text capitalize">we offer freelance jobs for programmers in different programming languages</p>
-                <a href="#" class="btn btn-primary">Be A Freelancer!</a>
+                <a href="{% url 'about' %}" class="btn btn-primary">Be A Freelancer!</a>
               </div>
             </div>
           </div>
@@ -179,7 +179,7 @@
               <div class="card-body">
                 <big class="card-title">Need a programmer?</big>
                 <p class="card-text capitalize">we can do it for you!<br>check out our services and our previous jobs <br><br></p>
-                <a href="#" class="btn btn-primary">Hire Us!</a>
+                <a href="{% url 'about' %}" class="btn btn-primary">Hire Us!</a>
               </div>
             </div>
           </div>
@@ -192,14 +192,14 @@
                 <div class="col-lg-4 text-lg-left f-caramel">Copyright © Saferasoft 2020</div>
                 <div class="col-lg-4 my-3 my-lg-0">
                   <center>
-                    <a href="#!" class="fa fa-twitter"></i></a>
-                    <a href="#!" class="fa fa-facebook"></i></a>
-                    <a href="#!" class="fa fa-linkedin"></i></a>
+                    <a href="{% url 'about' %}" class="fa fa-twitter"></i></a>
+                    <a href="{% url 'about' %}" class="fa fa-facebook"></i></a>
+                    <a href="{% url 'about' %}" class="fa fa-linkedin"></i></a>
                   </center>
                 </div>
                 <div class="col-lg-4 text-lg-right">
-                  <a class="mr-3 f-caramel" href="#!">Privacy Policy</a>
-                  <a class=" f-caramel" href="#!">Terms of Use</a>
+                  <a class="mr-3 f-caramel" href="{% url 'about' %}">Privacy Policy</a>
+                  <a class=" f-caramel" href="{% url 'about' %}">Terms of Use</a>
                 </div>
             </div>
         </div>
