@@ -129,7 +129,8 @@ def coInfo(request):
         fn = 'cote-d-ivoire'
 
     else:
-        fn = q.replace(' ', '-')
+        g = info.country
+        fn = g.replace(' ', '-')
 
     context = {
         'lang': lang,
