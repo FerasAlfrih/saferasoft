@@ -63,17 +63,7 @@ def coInfo(request):
     if q == 'KSA':
         q = 'Saudi Arabia'
 
-    if q == 'DRC':
-        fn = 'democratic-republic-of-the-congo'
-    elif q == 'CAR':
-        fn = 'central-african-republic'
-    elif q == 'S. Korea':
-        fn = 'South-Korea'
-    elif q == 'Ivory Coast':
-        fn = 'cote-d-ivoire'
-
-    else:
-        fn = q.replace(' ', '-')
+    
 
     infos = corona.objects.filter(country=q).count()
     if infos > 1:
@@ -127,6 +117,19 @@ def coInfo(request):
         lvl = 1
     else:
         lvl = 0
+
+
+    if q == 'DRC':
+        fn = 'democratic-republic-of-the-congo'
+    elif q == 'CAR':
+        fn = 'central-african-republic'
+    elif q == 'S. Korea':
+        fn = 'South-Korea'
+    elif q == 'Ivory Coast':
+        fn = 'cote-d-ivoire'
+
+    else:
+        fn = q.replace(' ', '-')
 
     context = {
         'lang': lang,
