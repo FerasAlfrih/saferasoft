@@ -42,30 +42,28 @@ def coInfo(request):
         info = corona.objects.filter(country=q).order_by('id').first()
     elif infos == 0:
         if worldCountries.objects.get(arname=q):
-
-        if worldCountries.objects.filter(arname=q):
-            x = worldCountries.objects.get(arname=q)
-            info = corona.objects.get(country=x.name)
-        elif worldCountries.objects.filter(frname=q):
-            x = worldCountries.objects.get(frname=q)
-            info = corona.objects.get(country=x.name)
-        elif worldCountries.objects.filter(grname=q):
-            x = worldCountries.objects.get(grname=q)
-            info = corona.objects.get(country=x.name)
-        elif worldCountries.objects.get(dename=q):
-        elif worldCountries.objects.filter(dename=q):
-            x = worldCountries.objects.get(dename=q)
-            info = corona.objects.get(country=x.name)
-        elif worldCountries.objects.filter(esname=q):
-            x = worldCountries.objects.get(esname=q)
-            info = corona.objects.get(country=x.name)
-        elif worldCountries.objects.filter(runame=q):
-            x = worldCountries.objects.get(runame=q)
-            info = corona.objects.get(country=x.name)
-        else:
-            info = corona.objects.get(country='World')
-            messages.success(request, f'Please check your spelling')
-            q = 'World'
+            if worldCountries.objects.filter(arname=q):
+                x = worldCountries.objects.get(arname=q)
+                info = corona.objects.get(country=x.name)
+            elif worldCountries.objects.filter(frname=q):
+                x = worldCountries.objects.get(frname=q)
+                info = corona.objects.get(country=x.name)
+            elif worldCountries.objects.filter(grname=q):
+                x = worldCountries.objects.get(grname=q)
+                info = corona.objects.get(country=x.name)
+            elif worldCountries.objects.filter(dename=q):
+                x = worldCountries.objects.get(dename=q)
+                info = corona.objects.get(country=x.name)
+            elif worldCountries.objects.filter(esname=q):
+                x = worldCountries.objects.get(esname=q)
+                info = corona.objects.get(country=x.name)
+            elif worldCountries.objects.filter(runame=q):
+                x = worldCountries.objects.get(runame=q)
+                info = corona.objects.get(country=x.name)
+            else:
+                info = corona.objects.get(country='World')
+                messages.success(request, f'Please check your spelling')
+                q = 'World'
     else:
         info = corona.objects.get(country=q)
 
