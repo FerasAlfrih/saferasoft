@@ -1,11 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from .models import corona, worldCountries
-from saferasoft.settings import BASE_DIR
-import os
-import csv
-import openpyxl
-from openpyxl import Workbook
+
 
 
 
