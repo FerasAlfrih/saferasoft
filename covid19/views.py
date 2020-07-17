@@ -1,4 +1,5 @@
 from django.shortcuts import render
+<<<<<<< HEAD
 from saferasoft.funcs import is_mobile, is_ar
 from .funcs import scraper
 from .models import corona, worldCountries
@@ -10,6 +11,15 @@ import os
 import csv
 import openpyxl
 from openpyxl import Workbook
+=======
+import requests
+from bs4 import BeautifulSoup
+from .models import corona, worldCountries, arabicCountries
+from django.contrib import messages
+from django.utils.translation import get_language_from_request, to_locale
+from saferasoft.views import is_mobile
+
+>>>>>>> 820d0aca133834def21d228a049442dd2109e2ef
 
 
 def coInfo(request):
@@ -33,6 +43,7 @@ def coInfo(request):
     if q == 'KSA':
         q = 'Saudi Arabia'
 
+<<<<<<< HEAD
     if q == 'DRC':
         fn = 'democratic-republic-of-the-congo'
     elif q == 'CAR':
@@ -43,27 +54,39 @@ def coInfo(request):
         fn = 'cote-d-ivoire'
     else:
         fn = q.replace(' ', '-')
+=======
+    
+>>>>>>> 820d0aca133834def21d228a049442dd2109e2ef
 
     infos = corona.objects.filter(country=q).count()
     if infos > 1:
         info = corona.objects.filter(country=q).order_by('id').first()
     elif infos == 0:
+<<<<<<< HEAD
         if worldCountries.objects.get(arname=q):
+=======
+
+        if worldCountries.objects.filter(arname=q):
+>>>>>>> 820d0aca133834def21d228a049442dd2109e2ef
             x = worldCountries.objects.get(arname=q)
             info = corona.objects.get(country=x.name)
-        elif worldCountries.objects.get(frname=q):
+        elif worldCountries.objects.filter(frname=q):
             x = worldCountries.objects.get(frname=q)
             info = corona.objects.get(country=x.name)
-        elif worldCountries.objects.get(grname=q):
+        elif worldCountries.objects.filter(grname=q):
             x = worldCountries.objects.get(grname=q)
             info = corona.objects.get(country=x.name)
+<<<<<<< HEAD
         elif worldCountries.objects.get(dename=q):
+=======
+        elif worldCountries.objects.filter(dename=q):
+>>>>>>> 820d0aca133834def21d228a049442dd2109e2ef
             x = worldCountries.objects.get(dename=q)
             info = corona.objects.get(country=x.name)
-        elif worldCountries.objects.get(esname=q):
+        elif worldCountries.objects.filter(esname=q):
             x = worldCountries.objects.get(esname=q)
             info = corona.objects.get(country=x.name)
-        elif worldCountries.objects.get(runame=q):
+        elif worldCountries.objects.filter(runame=q):
             x = worldCountries.objects.get(runame=q)
             info = corona.objects.get(country=x.name)
         else:
@@ -93,6 +116,20 @@ def coInfo(request):
         lvl = 2
     elif info.activecases == '0' and info.totaldeathes != '0':
         lvl = 1
+
+
+    if q == 'DRC':
+        fn = 'democratic-republic-of-the-congo'
+    elif q == 'CAR':
+        fn = 'central-african-republic'
+    elif q == 'S. Korea':
+        fn = 'South-Korea'
+    elif q == 'Ivory Coast':
+        fn = 'cote-d-ivoire'
+
+    else:
+        g = info.country
+        fn = g.replace(' ', '-')
 
     context = {
         'country': info.country,
