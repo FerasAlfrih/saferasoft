@@ -1,56 +1,21 @@
 from django.shortcuts import render
-import requests
-from bs4 import BeautifulSoup
-from .models import corona, worldCountries, arabicCountries
-from base.models import countryList
+from saferasoft.funcs import is_mobile, is_ar
+from .funcs import scraper
+from .models import corona, worldCountries
+
 from django.contrib import messages
-from django.utils.translation import get_language_from_request, to_locale
+from django.utils.translation import get_language_from_request
 from saferasoft.settings import BASE_DIR
 import os
 import csv
-from saferasoft.views import is_mobile
 import openpyxl
 from openpyxl import Workbook
-
-
-def scraper(request):
-    corona.objects.all().delete()
-    url = requests.get('https://www.worldometers.info/coronavirus/').text
-    bs = BeautifulSoup(url, 'lxml')
-
-    table = bs.find('table', {"id": "main_table_countries_today"})
-    tbody = table.find('tbody')
-    rows = tbody.findAll('tr')
-    for row in rows:
-        update = row.findAll('td')
-        country = update[1].text
-        country = country.replace('"', '')
-        totalcases = update[2].text
-        newcases = update[3].text
-        totaldeathes = update[4].text
-        newdeathes = update[5].text
-        totalrecovered = update[6].text
-        activecases = update[8].text
-        criticalcases = update[9].text
-        cu = corona(country=country,
-                    totalcases=totalcases,
-                    newcases=newcases,
-                    totaldeathes=totaldeathes,
-                    newdeathes=newdeathes,
-                    totalrecovered=totalrecovered,
-                    activecases=activecases,
-                    criticalcases=criticalcases,
-                    )
-        cu.save()
 
 
 def coInfo(request):
 
     context = {}
-    scraper(request)
-
-    lang = get_language_from_request(request)
-
+    # scraper(request)
     if request.GET.get('query'):
         query = request.GET.get('query')
     else:
@@ -76,7 +41,6 @@ def coInfo(request):
         fn = 'South-Korea'
     elif q == 'Ivory Coast':
         fn = 'cote-d-ivoire'
-
     else:
         fn = q.replace(' ', '-')
 
@@ -84,7 +48,6 @@ def coInfo(request):
     if infos > 1:
         info = corona.objects.filter(country=q).order_by('id').first()
     elif infos == 0:
-
         if worldCountries.objects.get(arname=q):
             x = worldCountries.objects.get(arname=q)
             info = corona.objects.get(country=x.name)
@@ -95,7 +58,7 @@ def coInfo(request):
             x = worldCountries.objects.get(grname=q)
             info = corona.objects.get(country=x.name)
         elif worldCountries.objects.get(dename=q):
-            ix = worldCountries.objects.get(dename=q)
+            x = worldCountries.objects.get(dename=q)
             info = corona.objects.get(country=x.name)
         elif worldCountries.objects.get(esname=q):
             x = worldCountries.objects.get(esname=q)
@@ -130,11 +93,8 @@ def coInfo(request):
         lvl = 2
     elif info.activecases == '0' and info.totaldeathes != '0':
         lvl = 1
-    else:
-        lvl = 0
 
     context = {
-        'lang': lang,
         'country': info.country,
         'totalcases': info.totalcases,
         'newcases': info.newcases,
@@ -150,13 +110,13 @@ def coInfo(request):
         'query': q,
 
     }
-    if is_mobile(request) == True:
-        if lang == 'ar':
+    if is_mobile(request):
+        if is_ar(request):
             return render(request, 'm/ar/covid19/covid19.html', context)
         else:
             return render(request, 'm/covid19/covid19.html', context)
     else:
-        if lang == 'ar':
+        if is_ar(request):
             return render(request, 'ar/covid19/covid19.html', context)
         else:
             return render(request, 'covid19/covid19.html', context)
