@@ -209,3 +209,12 @@ small {
     font-family: 'Libre Baskerville', serif;
     font-size: 25px;
 }
+.job {
+    padding: 20px;
+    width: 50%;
+    height: auto;
+    justify-content: space-between;
+    align-content: space-around;
+    align-self: center;
+    align-items: flex-start;
+}

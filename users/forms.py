@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import Profile
+from .models import Profile, Job
 
 
 class UserRegisterForm(UserCreationForm):
@@ -25,3 +25,16 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['image']
+
+class NewJob(forms.ModelForm):    
+    job = forms.CharField(max_length=999)
+    startDate = forms.DateField()
+    deadline = forms.DateField()
+    salary = forms.IntegerField()
+    withdrawal = forms.IntegerField()
+    details = forms.CharField()
+
+    class Meta:
+        model = Job
+        fields = ['job', 'details' ,'startDate','deadline', 'salary', 'withdrawal']
+

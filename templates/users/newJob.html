@@ -1,0 +1,29 @@
+
+	{% extends "base.html" %}
+	{% load crispy_forms_tags %}
+	{% load static %}
+
+	{% block title %}
+	New Job 
+	{% endblock title %}
+	{% block content %}
+	{% if user.is_authenticated %}
+	    <div class="content-section">
+	      <form method="POST" enctype="multipart/form-data" novalidate="novalidate">
+			{% csrf_token %}
+			<fieldset class="form-group">
+				<legend class="border-bottom mb-4">New Job</legend>
+		  		{{form|crispy}}
+		  		<button class="btn btn-outline-info" type="submit">Post</button>
+			</fieldset>   
+	      </form>
+	    </div>
+	{% else %}
+		<center>
+			<div class="mt-5 mb-5">
+				<a href="{% url 'login' %}"></a>		
+			</div>	
+		</center>
+	{% endif %}
+	{% endblock content %}
+

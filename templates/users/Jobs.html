@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}
+Jobs Available
+{% endblock title %}
+{% block content %}
+    <div class="content-section">
+      <a href="{% url 'newjob' %}"><button class="btn btn-outline-info">Post a new Job</button></a>
+      <center>
+      {% for job in jobs %}
+        <div class="job content-section bg-steel mt-2" >
+          <tr>
+            <h4>{{job.job}} </h4>
+            <small class="float-right">{{job.user.username}} </small>
+          </tr>
+          <hr>
+          <tr>            
+            <table>
+              <tr>
+                <td>
+                  <p>{{job.details}} </p>                
+                </td>              
+              </tr>
+              <tr>
+                <td>
+                  <small class="float-left">Salary: {{job.salary}} </small>
+                </td>
+                <td>
+                  <small class="float-right">Withdrawal Fine: {{job.withdrawal}} </small>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <small class="float-left">Starting Date: {{job.startDate}} </small>
+                </td>
+                <td>
+                  <small class="float-right">Deadline: {{job.deadline}} </small>
+                </td>
+              </tr>
+            </table> 
+          </tr>
+          <form method="POST">
+            {% csrf_token %}
+            <fieldset hidden="True">
+              <input type="text" name="job" value={{job.id}}>
+              <input type="text" name="user" value="{{user}}">
+            </fieldset>
+            <button class="btn btn-outline-info">Take the job</button>
+          </form>
+        </div>
+      {% endfor %}
+      </center>
+    </div>
+{% endblock content %}

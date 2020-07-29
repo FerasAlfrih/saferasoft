@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
+from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, NewJob
 from django.views import View
+from .models import Job, Profile
+from django.contrib.auth.models import User
+
 
 class UsersV(View):
 
@@ -44,3 +47,60 @@ class UsersV(View):
         }
 
         return render(request, 'users/profile.html', context)
+
+    @login_required
+    def newJob(request):        
+        if request.method == 'POST':
+            # form=NewJob(request.POST, instance=request.user)
+            # if form.is_valid():
+            #     form.save() 
+            user=request.user   
+            user=User.objects.get(username=user.username)
+            job = request.POST['job']
+            startDate = request.POST['startDate']
+            deadline = request.POST['deadline']
+            salary = request.POST['salary']
+            withdrawal = request.POST['withdrawal']
+            details = request.POST['details']
+            jb = Job(user=user,
+                    job=job,
+                    startDate=startDate,
+                    deadline=deadline,
+                    salary=salary,
+                    withdrawal=withdrawal,
+                    details=details,
+                )
+            
+            jb.save()
+            return redirect('jobs') 
+
+        else:
+            form=NewJob(request.POST, instance=request.user)
+            
+
+        context={
+        'form':form
+        }
+        return render(request, 'users/newJob.html', context)
+
+    @login_required
+    def jobs(request):
+        if request.method=='POST':
+            user=request.user
+            take = request.POST['job']
+            take =Job.objects.get(id=take)
+
+            usr = Profile.objects.get(user=user)
+            usr.jobAs = take
+            usr.save()
+            take.is_available = False 
+            take.save()
+
+            
+        job= Job.objects.filter(is_available=True)
+        context={
+            'jobs':job,
+        }
+        return render(request, 'users/Jobs.html', context)
+
+    
