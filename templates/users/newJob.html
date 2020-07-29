@@ -4,10 +4,14 @@
 	{% load static %}
 
 	{% block title %}
-	New Job 
+	  {% if user.is_superuser %}
+	    New Job
+	  {% else %}
+	    Admin Only Zone
+	  {% endif %}
 	{% endblock title %}
 	{% block content %}
-	{% if user.is_staff %}
+	{% if user.is_superuser %}
 	    <div class="content-section">
 	      <form method="POST" enctype="multipart/form-data" novalidate="novalidate">
 			{% csrf_token %}
@@ -20,7 +24,7 @@
 	    </div>
 	{% else %}  
 	    <center>
-	      <img src="{% static 'img/staffOnly.png' %}">  
+	      <img src="{% static 'img/adminOnly.png' %}">  
 	    </center>    
 	{% endif %}	
 {% endblock content %}
