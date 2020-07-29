@@ -104,7 +104,7 @@ class UsersV(View):
         return render(request, 'users/Jobs.html', context)
 
     @login_required
-    def Administrator(request):
+    def administrator(request):
         
         context={
             'jobs' : Job.objects.all(),

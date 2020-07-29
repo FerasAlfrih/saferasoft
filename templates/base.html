@@ -63,8 +63,11 @@
               <a class="nav-item nav-link  dropdown-item f-caramel" href="">Posts</a>
               <a class="nav-item nav-link  dropdown-item f-caramel" href="">Info</a>
               <div class="dropdown-divider">
-
               </div>
+              {% if user.is_superuser %}
+                <a class="nav-item nav-link dropdown-item f-caramel" href="{% url 'newjob' %} ">New Job</a>
+                <a class="nav-item nav-link dropdown-item f-caramel" href="{% url 'administrator' %} ">Administrator</a>
+              {% endif %}
               <a class="nav-item nav-link dropdown-item f-caramel" href="{% url 'logout' %} ">Logout</a>
             </div>
           </div>
