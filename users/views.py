@@ -109,6 +109,6 @@ class UsersV(View):
         context={
             'jobs' : Job.objects.all(),
             'users' : User.objects.all(),
-            'profile' : Profile.objects.all(),
+            'profiles' : Profile.objects.all(),
         }
         return render(request,'users/administrator.html', context)

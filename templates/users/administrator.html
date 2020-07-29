@@ -12,6 +12,26 @@
 	{% endblock title %}
 	{% block content %}
 	{% if user.is_superuser %}
+		<div>
+			<div>
+				<legend>User</legend>
+				{% for user in users %}
+					{{ user.username }}<br>
+					{% endfor %}
+			</div><hr>
+			<div>
+				<legend>Profile</legend>
+				{% for profile in profiles %}
+					{{ profile.user.first_name }}<br>
+					{% endfor %}
+			</div><hr>
+			<div>
+				<legend>Job</legend>
+				{% for job in jobs %}
+					{{ job.job }}<br>
+					{% endfor %}
+			</div>
+		</div>
 	    
 	{% else %}  
 	    <center>
