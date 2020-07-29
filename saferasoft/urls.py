@@ -28,4 +28,7 @@ urlpatterns = [
     path('services/', mv.services, name="services"),
     path('cov19/', include('covid19.urls')),
     path('', include('base.urls')),
+    path('user/', include('users.urls'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

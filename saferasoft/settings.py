@@ -42,9 +42,11 @@ INSTALLED_APPS = [
     # myapps
     'covid19.apps.Covid19Config',
     'base.apps.BaseConfig',
+    'users.apps.UsersConfig',
     'django_countries',
     'rest_framework',
     'translations',
+    'crispy_forms',
 
 ]
 
@@ -146,3 +148,11 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/medis/'
+
+
+LOGIN_REDIRECT_URL = 'base'
+LOGIN_URL = 'login'
