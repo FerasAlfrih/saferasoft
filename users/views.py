@@ -103,4 +103,12 @@ class UsersV(View):
         }
         return render(request, 'users/Jobs.html', context)
 
-    
+    @login_required
+    def Administrator(request):
+        
+        context={
+            'jobs' : Job.objects.all(),
+            'users' : User.objects.all(),
+            'profile' : Profile.objects.all(),
+        }
+        return render(request,'users/administrator.html', context)

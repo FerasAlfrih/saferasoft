@@ -1,0 +1,21 @@
+
+	{% extends "base.html" %}
+	{% load crispy_forms_tags %}
+	{% load static %}
+
+	{% block title %}
+	  {% if user.is_superuser %}
+	    Administrator Page
+	  {% else %}
+	    Admin Only Zone
+	  {% endif %}
+	{% endblock title %}
+	{% block content %}
+	{% if user.is_superuser %}
+	    
+	{% else %}  
+	    <center>
+	      <img src="{% static 'img/adminOnly.png' %}">  
+	    </center>    
+	{% endif %}	
+{% endblock content %}
