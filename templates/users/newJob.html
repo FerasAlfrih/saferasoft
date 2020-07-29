@@ -7,7 +7,7 @@
 	New Job 
 	{% endblock title %}
 	{% block content %}
-	{% if user.is_authenticated %}
+	{% if user.is_staff %}
 	    <div class="content-section">
 	      <form method="POST" enctype="multipart/form-data" novalidate="novalidate">
 			{% csrf_token %}
@@ -18,12 +18,10 @@
 			</fieldset>   
 	      </form>
 	    </div>
-	{% else %}
-		<center>
-			<div class="mt-5 mb-5">
-				<a href="{% url 'login' %}"></a>		
-			</div>	
-		</center>
-	{% endif %}
-	{% endblock content %}
+	{% else %}  
+	    <center>
+	      <img src="{% static 'img/staffOnly.png' %}">  
+	    </center>    
+	{% endif %}	
+{% endblock content %}
 
