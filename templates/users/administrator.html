@@ -2,6 +2,7 @@
 	{% extends "base.html" %}
 	{% load crispy_forms_tags %}
 	{% load static %}
+	{% load tz %}
 
 	{% block title %}
 	  {% if user.is_superuser %}
@@ -14,17 +15,68 @@
 	{% if user.is_superuser %}
 		<div>
 			<div>
-				<legend>User</legend>
-				{% for user in users %}
-					{{ user.username }}<br>
+				My Debts: -{{debt}}$
+			</div>
+			<div>
+				<legend>Out Dated</legend>
+				
+					{% for job in jobs %}
+						{% if job.deadline <= today.date %}
+							{{job.job}}<br>
+							{{job.user.username}}
+							<form method="POST" name="extend">
+								{% csrf_token %}
+								<input type="number" name="withdrawal" value="0" hidden>
+								<input type="date" name="date">
+								<input type="text" readonly name="job" value="{{job.job}}" >
+								<button class="btn btn-outline-info" type="submit"	name="extend" onclick="">Extend</button>
+							</form>
+							<form method="POST" name="charge">
+								
+								<input type="date" name="date" value="{{job.deadline}}" hidden>
+								<input type="number" name="withdrawal">
+								<input type="text" readonly name="job" value="{{job.job}}" >
+								<button class="btn btn-outline-alert" type="submit" name="charge" onclick="">Charge</button>
+							</form>
+						{% endif %}
 					{% endfor %}
 			</div><hr>
 			<div>
-				<legend>Profile</legend>
-				{% for profile in profiles %}
-					{{ profile.user.first_name }}<br>
-					{% endfor %}
-			</div><hr>
+				<legend>User</legend>
+				{% for user in users %}					
+					<table>
+						<tr>
+							<td>
+								{{ user.username }}: {{user.profile.balance}}$<br>
+								<form method="POST">
+									{% csrf_token %}
+									<input type="text" name="user" value="{{user.username}}" hidden>
+									is_staff:{%if  user.is_staff  %} <input type="checkbox" name="staff" checked>{% else %}<input type="checkbox" name="staff">{% endif %} <br>
+									is_superuser:{%if  user.is_superuser  %}<input type="checkbox" name="superuser" checked>{% else %}<input type="checkbox" name="superuser">{% endif %}	<br>									
+									<button class="btn-outline-warning" name="updateuser" >update</button>
+								</form>
+							</td>
+							<td><div class="col-6"></div></td>
+							<td>
+								{{user.profile.jobAs}}<br>
+								{{user.profile.jobAs.details}}<br>
+								{{user.profile.jobAs.salary}} - 
+								{{user.profile.jobAs.deadline}}
+							</td>
+						</tr>
+					</table>
+					
+					<form method="POST">
+						{% csrf_token %}
+						<input type="text" name="job" value="{{user.profile.jobAs.job}}" hidden>
+						<input type="text" name="user" value="{{user.username}}" hidden>
+						<input type="number" name="payment">
+						<button class="btn btn-outline-info" name="pay">Pay</button>
+						<button class="btn btn-outline-danger" name="cash">Cashout</button>						
+					</form>
+				<hr>{% endfor %}
+					
+			</div><hr>			
 			<div>
 				<legend>Job</legend>
 				{% for job in jobs %}

@@ -5,7 +5,7 @@ from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, NewJob
 from django.views import View
 from .models import Job, Profile
 from django.contrib.auth.models import User
-
+from django.utils import timezone
 
 class UsersV(View):
 
@@ -89,12 +89,15 @@ class UsersV(View):
             user=request.user
             take = request.POST['job']
             take =Job.objects.get(id=take)
-
             usr = Profile.objects.get(user=user)
-            usr.jobAs = take
-            usr.save()
-            take.is_available = False 
-            take.save()
+            if usr.jobAs == None:
+                usr.jobAs = take
+                usr.save()
+                take.is_available = False
+                take.asTo = usr.user
+                take.save()
+            else:
+                messages.warning(request,f'Finish your assigned job first!')
 
             
         job= Job.objects.filter(is_available=True)
@@ -104,11 +107,74 @@ class UsersV(View):
         return render(request, 'users/Jobs.html', context)
 
     @login_required
-    def administrator(request):
-        
+    def administrator(request):        
+        if request.method == 'POST':
+            if request.POST.get('updateuser') == '':
+                user=request.POST['user']
+                user = User.objects.get(username=user)
+                # print(request.POST['staff'])
+                # print(request.POST['superuser'])                
+                user.is_staff = request.POST.get('staff', '')== 'on' or False
+                user.is_superuser = request.POST.get('superuser', '') == 'on' or False
+                user.save()
+            elif request.POST.get('charge') == '':
+                withdrawal=request.POST['withdrawal']
+                withdrawal = int(withdrawal)                
+                job =request.POST['job'] 
+                job = Job.objects.get(job=job)                 
+                user = Profile.objects.get(jobAs=job)
+                user = user.user                 
+                blc = User.objects.get(username=user)
+                blc.profile.balance -= withdrawal
+                blc.profile.jobAs = None
+                blc.save() 
+                job.is_available = True
+                job.save()
+            elif request.POST.get('extend') == '': 
+                dt =request.POST['date']
+                job =request.POST['job'] 
+                job = Job.objects.get(job=job)  
+                job.deadline=dt
+                job.save()
+
+            elif request.POST.get('pay') == '':
+                user=request.POST['user']
+                user = User.objects.get(username=user)
+                user = Profile.objects.get(user=user)
+                payment = request.POST.get('payment')
+                payment = int(payment)
+                newBalance = user.balance + payment
+                user.balance =  newBalance
+                user.jobAs = None
+                user.save()
+                if request.POST.get('job'):
+                    job = request.POST.get('job')
+                    job = Job.objects.get(job=job)
+                    job.is_complete = True
+                    job.doneby = user.user.username
+                    job.asTo=None
+                    job.save()
+            elif request.POST.get('cash') == '':
+                user=request.POST['user']
+                user = User.objects.get(username=user)
+                user = Profile.objects.get(user=user)
+                payment = request.POST.get('payment')
+                payment = int(payment)
+                newBalance = user.balance - payment
+                user.balance =  newBalance
+                user.save()
+        profiles = Profile.objects.all()
+        debt = 0
+        for profile in profiles:
+            blns=profile.balance
+            debt+=blns
+
+        today = timezone.now()
         context={
             'jobs' : Job.objects.all(),
             'users' : User.objects.all(),
             'profiles' : Profile.objects.all(),
+            'today':today,
+            'debt': debt,
         }
         return render(request,'users/administrator.html', context)

@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from PIL import Image
 
+
 class Job(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     job = models.CharField(max_length=999)
@@ -10,7 +11,10 @@ class Job(models.Model):
     deadline = models.DateField()
     salary = models.IntegerField()
     withdrawal = models.IntegerField()
+    asTo = models.OneToOneField(User, related_name='worker' , on_delete=models.SET_NULL, null=True, blank=True)
     is_available = models.BooleanField(default=True)
+    is_complete = models.BooleanField(default=False)
+    doneby = models.CharField(max_length=999, blank=True, null=True)
 
         
     def __str__(self):
@@ -19,7 +23,8 @@ class Job(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(default='default.png', upload_to='profile_pics')
-    jobAs = models.OneToOneField(Job, on_delete=models.CASCADE, null=True, blank=True)
+    jobAs = models.OneToOneField(Job, on_delete=models.SET_NULL, null=True, blank=True)
+    balance = models.IntegerField(default=0, blank=True, null=True)
 
 
     def __str__(self):
