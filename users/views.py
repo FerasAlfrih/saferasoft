@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, NewJob
-from django.views.generic import View, DetailView, ListView
+from django.views.generic import View, UpdateView, ListView, FormView
 from .models import Job, Profile
 from django.contrib.auth.models import User
 from django.utils import timezone
@@ -84,6 +84,7 @@ class UsersV(View):
         }
         return render(request, 'users/newJob.html', context)
 
+
     @login_required
     def jobs(request, *args, **kwargs):
         if request.method=='POST':
@@ -109,10 +110,26 @@ class UsersV(View):
 
 
    
-    class job_details(DetailView):
+    class job_details(UpdateView):
         model = Job
-        
-
+        fields = ['job', 'user']
+        template = 'users/job_detail.html'
+        def save(self, request):
+            if request.method=='POST':
+                user=request.user
+                take = request.POST['job']
+                take =Job.objects.get(id=take)
+                usr = Profile.objects.get(user=user)
+                if usr.jobAs == None:
+                    usr.jobAs = take
+                    usr.save()
+                    take.is_available = False
+                    take.asTo = usr.user
+                    take.save()
+                else:
+                    messages.warning(request,f'Finish your assigned job first!')
+    
+            
 
     @login_required
     def administrator(request):        
