@@ -110,16 +110,14 @@
         </nav> 
       </header>
       <main class="mt-5">
-        <div class="col-6 mt-3">
+        <div class="mt-5">
           {% if messages %}
             <center>
-              <div class="col-lg-4 my-3 my-lg-0">
-                {% for message in messages %}
-                  <div class="alert alert-{{ message.tags }}">
-                    <small>{{ message }}</small>
-                  </div>
-                {% endfor %}
-              </div>
+              {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}" >
+                  <big>{{ message }}</big>
+                </div>
+              {% endfor %}
             </center>
           {% endif %}
         </div>
