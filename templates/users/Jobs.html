@@ -19,7 +19,7 @@
       {% for job in jobs %}
         <div class="job-box content-section" >
           <div class="job-title">
-            <h3 class="">{{job.job}}
+            <a href="{% url 'job_details' job.id %}"><h3 class="">{{job.job}}</a>
             {% if user.profile.last_logout <= job.startDate %}<big id="new">New</big>{% endif %}</h3>
             <big class="float-right ">{{job.user}}</big><hr>
           </div>

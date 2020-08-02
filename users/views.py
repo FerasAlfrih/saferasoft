@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, NewJob
@@ -6,7 +6,7 @@ from django.views.generic import View, UpdateView, ListView, FormView
 from .models import Job, Profile
 from django.contrib.auth.models import User
 from django.utils import timezone
-
+from django.contrib.auth import authenticate, login
 
 class UsersV(View):
 
@@ -15,15 +15,47 @@ class UsersV(View):
     def register(request):
         if request.method == 'POST':
             form = UserRegisterForm(request.POST)
-            if form.is_valid():
-                form.save()
+            
+            if form.is_valid() :
+                newUser = form.save()
+                newUser = authenticate(username=form.cleaned_data['username'],
+                                    password=form.cleaned_data['password1'],
+                                    )
+                login(request, newUser)
+                
                 username = form.cleaned_data.get('username')
-                messages.success(request, f'Your account has been created! You are now able to log in')
-                return redirect('login')
+                messages.success(request, f' welcome {username} Your account has been created! You can update your profile')
+                return redirect('register2')
         else:
             form = UserRegisterForm()
-        return render(request, 'users/register.html', {'form': form})
-
+            
+        context={
+        'form': form,
+        
+        }
+        return render(request, 'users/register.html', context)
+    
+    @staticmethod
+    def register2(request):
+        if request.method == 'POST':
+            
+            pform = ProfileUpdateForm(request.POST,
+                                    request.FILES,
+                                    instance=request.user.profile)
+            if  pform.is_valid():
+                
+                pform.save()
+                username = pform.cleaned_data.get('username')
+                messages.success(request, f'Welcome to our family!')
+                return redirect('base')
+        else:
+            
+            pform = ProfileUpdateForm()
+        context={
+       
+        'pform':pform,
+        }
+        return render(request, 'users/register2.html', context)
 
     @login_required
     def profile(request):
@@ -109,25 +141,33 @@ class UsersV(View):
         return render(request, 'users/Jobs.html', context,*args, **kwargs )
 
 
-   
-    class job_details(UpdateView):
-        model = Job
-        fields = ['job', 'user']
-        template = 'users/job_detail.html'
-        def save(self, request):
-            if request.method=='POST':
-                user=request.user
-                take = request.POST['job']
-                take =Job.objects.get(id=take)
-                usr = Profile.objects.get(user=user)
-                if usr.jobAs == None:
-                    usr.jobAs = take
-                    usr.save()
-                    take.is_available = False
-                    take.asTo = usr.user
-                    take.save()
-                else:
-                    messages.warning(request,f'Finish your assigned job first!')
+    @login_required
+    def job_details(request, pk, *args,  **kwargs):
+        
+        print(pk)
+        job = Job.objects.get(id=pk)
+
+        if request.method=='POST':
+            user=request.user
+
+            take = request.POST['job']
+            take =Job.objects.get(id=take)
+            pk = request.POST.get('pk')
+            usr = Profile.objects.get(user=user)
+            if usr.jobAs == None:
+                usr.jobAs = take
+                usr.save()
+                take.is_available = False
+                take.asTo = usr.user
+                take.save()
+            else:
+                messages.warning(request,f'Finish your assigned job first!')
+
+        context={
+            'job':job,
+            'pk':pk,
+        }
+        return render(request, 'users/job_detail.html', context, *args, **kwargs)
     
             
 
