@@ -1,0 +1,10 @@
+@import 'capitalization.css';
+@import 'special.css';
+@import 'jobs.css';
+@import'admin.css';
+
+body{
+	background-color: #3D3C3A;
+	width: 100%;
+
+}

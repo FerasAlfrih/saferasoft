@@ -24,7 +24,7 @@
             <big class="float-right ">{{job.user}}</big><hr>
           </div>
           <div class="job-body ">
-            <p>{{job.details|slice:":250"}} ... <a href="" class="f-metalic"><u>read more</u></a></p>
+            <p>{{job.details|slice:":250"}} ... <a href="{% url 'job_details' job.id %}" class="f-metalic" ><u>read more</u></a></p>
             <span class="float-left">
               <big>Salary: {{job.salary}}$</big>
             </span>

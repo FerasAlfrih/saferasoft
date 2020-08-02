@@ -2,3 +2,7 @@
 @import 'special.css';
 @import 'jobs.css';
 @import'admin.css';
+
+body{
+	background-color: #FDEEF4;
+}

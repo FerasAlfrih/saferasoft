@@ -27,17 +27,13 @@
 
     <!-- my styling files -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/socialMedia.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
-    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script>
-      $(function(){
-          $('a','.navigate').each(function(){
-              if ($(this).prop('href') == window.location.href) {
-                  $(this).addClass('active'); $(this).parents('li').addClass('active');
-              }
-          });
-      });
-    </script>
+    {% if user.profile.sex == 'Female' %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/female.css' %}">
+    {% else %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/male.css' %}">
+    {% endif %}
+    <script src="{% static 'js/main.js' %}"></script>
+   
     <!-- FAVICON -->
     {% block favicon %}
     <link rel="icon" type="icon" href="{% static 'img/favicon.ico' %}">
@@ -47,24 +43,18 @@
       <title>{% block title %}Saferasoft{% endblock title %}</title>
 
   </head>
-  <body class="container bg-pearl">
-    <div class="container">
-      <div class="">
-        <img src="{% static 'img/logo.png' %}"  >        
-      </div>
+  <body class="container">
+    <div class="container">      
       <header>        
-        <nav class="navigate">  
+        <nav class="navigate fixed-top">  
           <div class="navigate" id="navbarNav">                         
             {% if user.is_authenticated %}
-              <div class="navigate-user float-left dropdown">
+              <div class="navigate-user dropdown">
                 <span role="button" data-toggle="dropdown" id="prflimg" aria-haspopup="true" aria-expanded="false" style="width:75px">
-                  <table>
-                  <tr>
-                      <td rowspan="2"><img class="rounded-circle dropdown-toggle"  width="50px"  height="50px" src="{{ user.profile.image.url }}"></td>
-                      <td class="navigate-user f-orchideM"><a><b><i>{{ user.first_name }} {{ user.last_name }}</i></b></a></td>
-                  </tr>
-                  
-                  </table>
+                 <div class="navigate-user">
+                    <img class="rounded-circle dropdown-toggle"  width="50px"  height="50px" src="{{ user.profile.image.url }}"><br>
+                    <a><b><i>{{ user.first_name }} {{ user.last_name }}</i></b></a>
+                 </div>                 
                 </span>
                 <div class="navigate-form dropdown-menu rounded" aria-labelledby="prflimg">
                   <a class="  dropdown-item " href="{% url 'profile' %}">Profile</a>
@@ -80,43 +70,44 @@
                 </div>
               </div>
             {% else %}
-              <div class='float-left'>
-                  <!-- <button class="nav-item " onclick="SignInForm()">Login</button> |
-                  <button class="nav-item " onclick="SignUpForm()">Register</button> -->
+              <div class='navigate-user'>
                   <a href="{% url 'login' %}" class="btn ">Login</a>
                   <a href="{% url 'register' %}" class="btn">Register</a>
               </div>
             {% endif %}
-            <ul class="navigate float-right" > 
-              <li class="navigate float-left">
-                <a class=" js-scroll-trigger text-menu"href="{% url 'base' %}">Home</a>
+            <ul class="navigate"  id="navbar"> 
+              <li class="navigate" >
+                <a class="navigate nav-btn js-scroll-trigger"href="{% url 'base' %}" id="Home">Home</a>
               </li>
               {% if user.is_staff %}
-              <li class="navigate float-left">
-                <a class="js-scroll-trigger text-menu"href="{% url 'jobs' %}">Jobs</a>
+              <li class="navigate">
+                <a class="navigate nav-btn js-scroll-trigger"href="{% url 'jobs' %}" id="Jobs">Jobs</a>
               </li>
               {% endif %}
-              <li class="navigate float-left">
-                <a class="js-scroll-trigger text-menu"href="{% url 'covid19' %}">Covid19 Info</a>
+              <li class="navigate">
+                <a class="navigate nav-btn js-scroll-trigger"href="{% url 'covid19' %}" id="Covid19">Covid19 Info</a>
               </li>
-              <li class="navigate float-left">
-                <a class="js-scroll-trigger text-menu"href="{% url 'services' %}">Services</a>
+              <li class="navigate">
+                <a class="navigate nav-btn js-scroll-trigger"href="{% url 'services' %}" id="Services">Services</a>
               </li>
-              <li class="navigate float-left">
-                <a class="js-scroll-trigger text-menu"href="{% url 'profolio' %}">Portfolio</a>
+              <li class="navigate">
+                <a class="navigate nav-btn js-scroll-trigger"href="{% url 'portfolio' %}" id="Portfolio">Portfolio</a>
               </li>
-              <li class="navigate float-left">
-                <a class="js-scroll-trigger text-menu"href="{% url 'about' %}">About</a>
+              <li class="navigate">
+                <a class="navigate nav-btn js-scroll-trigger"href="{% url 'about' %}" id="About">About</a>
               </li>
-              <li class="navigate float-left">
-                <a class="js-scroll-trigger text-menu"href="{% url 'team' %}">Team</a>
+              <li class="navigate">
+                <a class="navigate nav-btn js-scroll-trigger"href="{% url 'team' %}" id="Team">Team</a>
               </li>
-              <li class="navigate float-left">
-                <a class="js-scroll-trigger text-menu"href="{% url 'contact' %}">Contact</a>
+              <li class="navigate">
+                <a class="navigate nav-btn js-scroll-trigger"href="{% url 'contact' %}" id="Contact">Contact</a>
               </li>
             </ul> 
-          </div>
-        </nav>        
+          </div>          
+          <div id="logo" class="mr-auto">
+            <img src="{% static 'img/logo.png' %}"  >        
+          </div>       
+        </nav> 
       </header>
       <main class="mt-5">
         <div class="col-6 mt-3">
@@ -258,5 +249,10 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      setActive();
+      sticky();
+    </script>
+
   </body>
 </html>

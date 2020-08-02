@@ -8,6 +8,7 @@ urlpatterns = [
     path('profile/', UsersV.profile, name='profile'),
     path('newjob/', UsersV.newJob, name='newjob'),
     path('jobs/', UsersV.jobs, name='jobs'),
+    path('jobs/details/<int:pk>/', UsersV.job_details.as_view(), name='job_details'),
     path('administrator/', UsersV.administrator, name='administrator'),
 
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
@@ -32,4 +33,4 @@ urlpatterns = [
              template_name='users/password_reset_complete.html'
          ),
          name='password_reset_complete'),
-]
+    ]

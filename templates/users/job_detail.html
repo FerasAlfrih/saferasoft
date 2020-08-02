@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %}
+  {% if user.is_staff %}
+    Job Details
+  {% else %}
+    Staff Only Zone
+  {% endif %}
+{% endblock title %}
+{% block content %}
+	<center>
+		{% if user.is_staff %}    
+		    <div class="job-box content-section" >
+	          <div class="job-title">
+	            <h1 class="">{{job.job}}
+	            {% if user.profile.last_logout <= job.startDate %}<big id="new">New</big>{% endif %}</h1>
+	            <h4 class="float-right ">{{job.user}}</h4><hr>
+	          </div>
+	          <div class="job-body ">
+	            <h5>{{job.details}} </h5>
+	            <span class="float-left">
+	              <big>Salary: {{job.salary}}$</big>
+	            </span>
+	            <span class="float-right">
+	              <big>Withdrawal Fine: {{job.withdrawal}}$</big>
+	            </span>
+	          </div><br>
+	          <div class="job-body">
+	            <span class="float-left">
+	              <big>Date Posted: {{job.startDate}}</big>
+	            </span>
+	            <span class="float-right">
+	              <big>Deadline: {{job.deadline}}</big>
+	            </span>
+	          </div><br>
+	          <form method="POST">
+	            {% csrf_token %}
+	            <fieldset hidden="True">
+	              <input type="text" name="job" value={{job.id}}>
+	              <input type="text" name="user" value="{{user}}">
+	            </fieldset>
+	            <button class="btn btn-danger">Take the job</button>
+	          </form>
+	        </div>
+	  	{% else %}  
+		    <center>
+		      <img src="{% static 'img/staffOnly.png' %}">  
+		    </center>    
+	 	{% endif %}
+	</center>	
+{% endblock content %}

@@ -1,0 +1,36 @@
+.text-menu {
+    font-family: 'Crimson Pro', serif;
+    font-size: 20px;
+
+}
+.text-title {
+    text-transform: capitalize;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 40px;
+
+}
+.text-unique {
+    font-family: 'Dancing Script', cursive;
+
+
+}
+.text-paragraph{
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+}
+.text-signiture {
+    font-family: 'Great Vibes', cursive;
+}
+
+.content{
+    padding-top: 10.5rem;
+    padding-bottom: 6rem;
+    /*background-image: url("../img/5.jpg");
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center center;
+    background-size: cover;*/
+}
+
+
+

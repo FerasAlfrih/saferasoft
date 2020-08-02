@@ -1,0 +1,18 @@
+p {
+    font-family: 'Playfair Display', serif;
+    font-size: 10px;
+    
+}
+
+big {
+
+    text-transform: capitalize;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 12px;
+}
+small {
+
+    text-transform: capitalize;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 7px;
+}
