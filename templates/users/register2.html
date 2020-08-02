@@ -5,25 +5,25 @@
 {% endblock title %}
 {% block content %}
     <div class="content-section">
-        <form method="POST">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Join Today</legend><bbr/><br/>
+        <center>
+            <form method="POST" class="f-pearl">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Almost Done</legend><bbr/><br/>
 
-                <h5 class="border-bottom text-primary"> Profile Info </h5>
-                                {{ pform|crispy }} 
-                               <hr/> 
-
-
-                </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit" method='POST'>Sign Up</button>
+                    <h5 class="border-bottom text-primary"> Profile Info </h5>
+                                    {{ pform|crispy }} 
+                                   <br/> 
+                    </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit" method='POST'>Finish</button>
+                </div>
+            </form>
+            <div class="border-top pt-3">
+                <small class="text-muted">
+                    Already Have An Account? <a class="ml-2" href="{% url 'login' %}">Sign In</a>
+                </small>
             </div>
-        </form>
-        <div class="border-top pt-3">
-            <small class="text-muted">
-                Already Have An Account? <a class="ml-2" href="{% url 'login' %}">Sign In</a>
-            </small>
-        </div>
+        </center>        
     </div>
 {% endblock content %}
