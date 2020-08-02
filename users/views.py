@@ -36,26 +36,29 @@ class UsersV(View):
         return render(request, 'users/register.html', context)
     
     @staticmethod
-    def register2(request):
-        if request.method == 'POST':
-            
-            pform = ProfileUpdateForm(request.POST,
-                                    request.FILES,
-                                    instance=request.user.profile)
-            if  pform.is_valid():
+    def register2(request, *args, **kwargs):
+        if request.user.is_authenticated:
+            if request.method == 'POST':
                 
-                pform.save()
-                username = pform.cleaned_data.get('username')
-                messages.success(request, f'Welcome to our family!')
-                return redirect('base')
+                pform = ProfileUpdateForm(request.POST,
+                                        request.FILES,
+                                        instance=request.user.profile)
+                if  pform.is_valid():
+                    
+                    pform.save()
+                    username = pform.cleaned_data.get('username')
+                    messages.success(request, f'Welcome to our family!')
+                    return redirect('base')
+            else:
+                
+                pform = ProfileUpdateForm()
+            context={
+           
+            'pform':pform,
+            }
+            return render(request, 'users/register2.html', context)
         else:
-            
-            pform = ProfileUpdateForm()
-        context={
-       
-        'pform':pform,
-        }
-        return render(request, 'users/register2.html', context)
+            return redirect('register')
 
     @login_required
     def profile(request):
