@@ -15,7 +15,7 @@
     <META NAME="geo.region" CONTENT="Country Subdivision Code">
     {% block meta %}
     <meta name="description" content="A freelance programming company with a great team of programmers in many languages">
-    <meta name="og:title" property="og:title" content="Saferasoft: We transform your idea into a code">
+    <meta name="og:title" property="og:title" content="Saferasoft: coding Your Dreams, Simply">
 
     {% endblock meta %}
     <!-- Bootstrap CSS -->
@@ -28,6 +28,16 @@
     <!-- my styling files -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/socialMedia.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script>
+      $(function(){
+          $('a','.navigate').each(function(){
+              if ($(this).prop('href') == window.location.href) {
+                  $(this).addClass('active'); $(this).parents('li').addClass('active');
+              }
+          });
+      });
+    </script>
     <!-- FAVICON -->
     {% block favicon %}
     <link rel="icon" type="icon" href="{% static 'img/favicon.ico' %}">
@@ -39,65 +49,70 @@
   </head>
   <body class="container bg-pearl">
     <div class="container">
-      <div class="sticky-top ">
+      <div class="">
         <img src="{% static 'img/logo.png' %}"  >        
       </div>
       <header>        
-        <nav class="navbar navbar-expand-lg fixed-top mt-5">                 
-          <button class="navbar-toggler"  type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon">Menu</span>
-          </button>
-        {% if user.is_authenticated %}
-          <div class="dropdown ml-auto nav-item f-caramel ">
-            <span role="button" data-toggle="dropdown" id="prflimg" aria-haspopup="true" aria-expanded="false" style="width:75px">
-              <table>
-              <tr>
-                  <td rowspan="2"><img class="rounded-circle dropdown-toggle"  width="50px"  height="50px" src="{{ user.profile.image.url }}"></td>
-                  <td><a><b><i>{{ user.first_name }} {{ user.last_name }}</i></b></a></td>
-              </tr>
-              
-              </table>
-            </span>
-            <div class="dropdown-menu nav-item ml-2 bg-metalic rounded" aria-labelledby="prflimg">
-              <a class="nav-item nav-link  dropdown-item f-caramel" href="{% url 'profile' %}">Profile</a>
-              <a class="nav-item nav-link  dropdown-item f-caramel" href="">Posts</a>
-              <a class="nav-item nav-link  dropdown-item f-caramel" href="">Info</a>
-              <div class="dropdown-divider">
+        <nav class="navigate">  
+          <div class="navigate" id="navbarNav">                         
+            {% if user.is_authenticated %}
+              <div class="navigate-user float-left dropdown">
+                <span role="button" data-toggle="dropdown" id="prflimg" aria-haspopup="true" aria-expanded="false" style="width:75px">
+                  <table>
+                  <tr>
+                      <td rowspan="2"><img class="rounded-circle dropdown-toggle"  width="50px"  height="50px" src="{{ user.profile.image.url }}"></td>
+                      <td class="navigate-user f-orchideM"><a><b><i>{{ user.first_name }} {{ user.last_name }}</i></b></a></td>
+                  </tr>
+                  
+                  </table>
+                </span>
+                <div class="navigate-form dropdown-menu rounded" aria-labelledby="prflimg">
+                  <a class="  dropdown-item " href="{% url 'profile' %}">Profile</a>
+                  <a class="  dropdown-item " href="">Posts</a>
+                  <a class="  dropdown-item " href="">Info</a>
+                  <div class="dropdown-divider">
+                  </div>
+                  {% if user.is_superuser %}
+                    <a class="nav-item nav-link dropdown-item " href="{% url 'newjob' %} ">New Job</a>
+                    <a class="nav-item nav-link dropdown-item " href="{% url 'administrator' %} ">Administrator</a>
+                  {% endif %}
+                  <a class="nav-item nav-link dropdown-item " href="{% url 'logout' %} ">Logout</a>
+                </div>
               </div>
-              {% if user.is_superuser %}
-                <a class="nav-item nav-link dropdown-item f-caramel" href="{% url 'newjob' %} ">New Job</a>
-                <a class="nav-item nav-link dropdown-item f-caramel" href="{% url 'administrator' %} ">Administrator</a>
+            {% else %}
+              <div class='float-left'>
+                  <!-- <button class="nav-item " onclick="SignInForm()">Login</button> |
+                  <button class="nav-item " onclick="SignUpForm()">Register</button> -->
+                  <a href="{% url 'login' %}" class="btn ">Login</a>
+                  <a href="{% url 'register' %}" class="btn">Register</a>
+              </div>
+            {% endif %}
+            <ul class="navigate float-right" > 
+              <li class="navigate float-left">
+                <a class=" js-scroll-trigger text-menu"href="{% url 'base' %}">Home</a>
+              </li>
+              {% if user.is_staff %}
+              <li class="navigate float-left">
+                <a class="js-scroll-trigger text-menu"href="{% url 'jobs' %}">Jobs</a>
+              </li>
               {% endif %}
-              <a class="nav-item nav-link dropdown-item f-caramel" href="{% url 'logout' %} ">Logout</a>
-            </div>
-          </div>
-        {% else %}
-          <div class='float-right mt-2'>
-              <!-- <button class="nav-item " onclick="SignInForm()">Login</button> |
-              <button class="nav-item " onclick="SignUpForm()">Register</button> -->
-              <a href="{% url 'login' %}" class="btn btn-outline-warning">Login</a>
-              <a href="{% url 'register' %}" class="btn btn-outline-warning">Register</a>
-          </div>
-        {% endif %}
-          <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav" >
-              <li class="nav-item">
-                <a class="nav-link js-scroll-trigger text-menu f-gold"href="{% url 'covid19' %}">Covid19 Info</a>
+              <li class="navigate float-left">
+                <a class="js-scroll-trigger text-menu"href="{% url 'covid19' %}">Covid19 Info</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link js-scroll-trigger text-menu f-gold"href="{% url 'services' %}">Services</a>
+              <li class="navigate float-left">
+                <a class="js-scroll-trigger text-menu"href="{% url 'services' %}">Services</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link js-scroll-trigger text-menu f-gold"href="{% url 'profolio' %}">Portfolio</a>
+              <li class="navigate float-left">
+                <a class="js-scroll-trigger text-menu"href="{% url 'profolio' %}">Portfolio</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link js-scroll-trigger text-menu f-gold"href="{% url 'about' %}">About</a>
+              <li class="navigate float-left">
+                <a class="js-scroll-trigger text-menu"href="{% url 'about' %}">About</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link js-scroll-trigger text-menu f-gold"href="{% url 'team' %}">Team</a>
+              <li class="navigate float-left">
+                <a class="js-scroll-trigger text-menu"href="{% url 'team' %}">Team</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link js-scroll-trigger text-menu f-gold"href="{% url 'contact' %}">Contact</a>
+              <li class="navigate float-left">
+                <a class="js-scroll-trigger text-menu"href="{% url 'contact' %}">Contact</a>
               </li>
             </ul> 
           </div>

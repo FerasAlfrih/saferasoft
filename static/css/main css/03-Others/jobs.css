@@ -1,0 +1,35 @@
+.job-container{
+	size: 100%;
+	justify-content: relative;
+	color: #FDEEF4;
+
+}
+.job-box {
+	background: #7D1B7E;
+	border-radius: 15px;
+    padding: 20px;
+    width: 50%;
+    height: 70;
+    justify-content: absolute;
+    align-content: space-between;
+    align-self: center;
+    align-items: flex-start;
+    margin-top: 20px;
+
+}
+.job-box #new{
+    color: red;
+    
+
+}
+.job-title h3:hover{
+    text-shadow: 2px 2px 5px #000;
+
+}
+.job-body{
+
+}
+.job-body a:hover{
+	background: #BCC6CC;
+	color: #C68E17;
+}

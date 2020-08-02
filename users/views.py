@@ -7,6 +7,7 @@ from .models import Job, Profile
 from django.contrib.auth.models import User
 from django.utils import timezone
 
+
 class UsersV(View):
 
 
@@ -100,7 +101,7 @@ class UsersV(View):
                 messages.warning(request,f'Finish your assigned job first!')
 
             
-        job= Job.objects.filter(is_available=True)
+        job= Job.objects.filter(is_available=True).order_by('-startDate')
         context={
             'jobs':job,
         }
@@ -129,6 +130,7 @@ class UsersV(View):
                 blc.profile.jobAs = None
                 blc.save() 
                 job.is_available = True
+                job.asTo=None
                 job.save()
             elif request.POST.get('extend') == '': 
                 dt =request.POST['date']

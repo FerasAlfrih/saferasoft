@@ -25,7 +25,7 @@ class Profile(models.Model):
     image = models.ImageField(default='default.png', upload_to='profile_pics')
     jobAs = models.OneToOneField(Job, on_delete=models.SET_NULL, null=True, blank=True)
     balance = models.IntegerField(default=0, blank=True, null=True)
-
+    last_logout = models.DateField(default='1970-01-01', blank=True, null=True)
 
     def __str__(self):
         return f'{self.user.username} Profile'

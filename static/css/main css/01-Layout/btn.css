@@ -1,0 +1,23 @@
+.btn {
+	border-radius: 7px;
+	background: #FDEEF4;
+	color: #B048B5;
+ 	border: all;
+ 	border-color:#B048B5; 
+ 	border-width: 2px;
+}
+.btn-danger:hover {
+	background: #FF0000;
+	color:  #FDEEF4;
+	border-color:#FDEEF4;
+}
+.btn-warning:hover{
+	background: #00FF00;
+	color:  #FDEEF4;
+	border-color:#FDEEF4;
+}
+.btn-btn:hover{
+	background: #B048B5;
+	color:  #FDEEF4;
+	border-color:#FDEEF4; 
+}
