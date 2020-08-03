@@ -145,26 +145,33 @@ class UsersV(View):
 
 
     @login_required
-    def job_details(request, pk, *args,  **kwargs):
-        
-        print(pk)
+    def job_details(request, pk, *args,  **kwargs):        
         job = Job.objects.get(id=pk)
 
         if request.method=='POST':
             user=request.user
+            if request.POST.get('take') == '':
+                take = request.POST['job']
+                take =Job.objects.get(id=take)
+                pk = request.POST.get('pk')
+                usr = Profile.objects.get(user=user)
+                if usr.jobAs == None:
+                    usr.jobAs = take
+                    usr.save()
+                    take.is_available = False
+                    take.asTo = usr.user
+                    take.save()
+                else:
+                    messages.warning(request,f'Finish your assigned job first!')
+            elif request.POST.get('ready') == '':
+                ready = request.POST['job']
+                ready =Job.objects.get(id=ready)
+                pk = request.POST.get('pk')
+                usr = Profile.objects.get(user=user)
+                ready.is_ready = True
+                ready.save()
+                return redirect('jobs')
 
-            take = request.POST['job']
-            take =Job.objects.get(id=take)
-            pk = request.POST.get('pk')
-            usr = Profile.objects.get(user=user)
-            if usr.jobAs == None:
-                usr.jobAs = take
-                usr.save()
-                take.is_available = False
-                take.asTo = usr.user
-                take.save()
-            else:
-                messages.warning(request,f'Finish your assigned job first!')
 
         context={
             'job':job,
@@ -175,75 +182,90 @@ class UsersV(View):
             
 
     @login_required
-    def administrator(request):        
-        if request.method == 'POST':
-            if request.POST.get('updateuser') == '':
-                user=request.POST['user']
-                user = User.objects.get(username=user)
-                # print(request.POST['staff'])
-                # print(request.POST['superuser'])                
-                user.is_staff = request.POST.get('staff', '')== 'on' or False
-                user.is_superuser = request.POST.get('superuser', '') == 'on' or False
-                user.save()
-            elif request.POST.get('charge') == '':
-                withdrawal=request.POST['withdrawal']
-                withdrawal = int(withdrawal)                
-                job =request.POST['job'] 
-                job = Job.objects.get(job=job)                 
-                user = Profile.objects.get(jobAs=job)
-                user = user.user                 
-                blc = User.objects.get(username=user)
-                blc.profile.balance -= withdrawal
-                blc.profile.jobAs = None
-                blc.save() 
-                job.is_available = True
-                job.asTo=None
-                job.save()
-            elif request.POST.get('extend') == '': 
-                dt =request.POST['date']
-                job =request.POST['job'] 
-                job = Job.objects.get(job=job)  
-                job.deadline=dt
-                job.save()
-
-            elif request.POST.get('pay') == '':
-                user=request.POST['user']
-                user = User.objects.get(username=user)
-                user = Profile.objects.get(user=user)
-                payment = request.POST.get('payment')
-                payment = int(payment)
-                newBalance = user.balance + payment
-                user.balance =  newBalance
-                user.jobAs = None
-                user.save()
-                if request.POST.get('job'):
-                    job = request.POST.get('job')
-                    job = Job.objects.get(job=job)
-                    job.is_complete = True
-                    job.doneby = user.user.username
+    def administrator(request):
+        if request.user.is_superuser:    
+            if request.method == 'POST':
+                if request.POST.get('updateuser') == '':
+                    user=request.POST['user']
+                    user = User.objects.get(username=user)           
+                    user.is_staff = request.POST.get('staff', '')== 'on' or False
+                    user.is_superuser = request.POST.get('superuser', '') == 'on' or False
+                    user.save()
+                elif request.POST.get('charge') == '':
+                    withdrawal=request.POST['withdrawal']
+                    withdrawal = int(withdrawal)                
+                    job =request.POST['job'] 
+                    job = Job.objects.get(job=job)                 
+                    user = Profile.objects.get(jobAs=job)
+                    user = user.user                 
+                    blc = User.objects.get(username=user)
+                    blc.profile.balance -= withdrawal
+                    blc.profile.jobAs = None
+                    blc.save() 
+                    job.is_available = True
                     job.asTo=None
                     job.save()
-            elif request.POST.get('cash') == '':
-                user=request.POST['user']
-                user = User.objects.get(username=user)
-                user = Profile.objects.get(user=user)
-                payment = request.POST.get('payment')
-                payment = int(payment)
-                newBalance = user.balance - payment
-                user.balance =  newBalance
-                user.save()
-        profiles = Profile.objects.all()
-        debt = 0
-        for profile in profiles:
-            blns=profile.balance
-            debt+=blns
+                elif request.POST.get('extend') == '': 
+                    dt =request.POST['date']
+                    job =request.POST['job'] 
+                    job = Job.objects.get(job=job)  
+                    job.deadline=dt
+                    job.save()
 
-        today = timezone.now()
-        context={
-            'jobs' : Job.objects.all(),
-            'users' : User.objects.all(),
-            'profiles' : Profile.objects.all(),
-            'today':today,
-            'debt': debt,
-        }
-        return render(request,'users/administrator.html', context)
+                elif request.POST.get('pay') == '':
+                    user=request.POST['user']
+                    user = User.objects.get(username=user)
+                    user = Profile.objects.get(user=user)
+                    payment = request.POST.get('payment')
+                    payment = int(payment)
+                    newBalance = user.balance + payment
+                    user.balance =  newBalance
+                    user.jobAs = None
+                    user.save()
+                elif request.POST.get('cash') == '':
+                    user=request.POST['user']
+                    user = User.objects.get(username=user)
+                    user = Profile.objects.get(user=user)
+                    payment = request.POST.get('payment')
+                    payment = int(payment)
+                    newBalance = user.balance - payment
+                    user.balance =  newBalance
+                    user.save()
+                elif request.POST.get('complete') == '':
+                    user=request.POST['user']
+                    user = User.objects.get(username=user)
+                    user = Profile.objects.get(user=user)
+                    completed = request.POST.get('job')
+                    print('1', completed)
+                    completed = Job.objects.get(job=completed)
+                    print('2',completed)
+                    payment = request.POST.get('payment')
+                    payment = int(payment)
+                    newBalance = user.balance + payment
+                    user.balance =  newBalance
+                    user.jobAs = None                    
+                    user.save()
+                    completed.is_ready=False
+                    completed.is_complete = True
+                    completed.doneby = completed.asTo.username 
+                    completed.asTo = None                   
+                    completed.save()
+
+
+            profiles = Profile.objects.all()
+            debt = 0
+            for profile in profiles:
+                blns=profile.balance
+                debt+=blns
+
+            today = timezone.now()
+            context={
+                'jobs' : Job.objects.all(),
+                'users' : User.objects.all(),
+                'profiles' : Profile.objects.all(),
+                'today':today,
+                'debt': debt,
+            }
+            return render(request,'users/administrator.html', context)
+        else:
+            return render(request,'base.html')

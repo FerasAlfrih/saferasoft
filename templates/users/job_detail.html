@@ -40,7 +40,14 @@
 	              <input type="text" name="job" value={{job.id}}>
 	              <input type="text" name="user" value="{{user}}">
 	            </fieldset>
-	            <button class="btn btn-danger">Take the job</button>
+	           
+	            {% if job.is_available %}
+	            <button class="btn btn-danger" name='take'>Take the job</button>
+	            {% endif %}
+	            {% if job.asTo == user and job.is_ready == False %}
+
+	            <button class="btn btn-warning" name='ready'>Mark Ready</button>
+	            {% endif %}
 	          </form>
 	        </div>
 	  	{% else %}  

@@ -14,6 +14,7 @@ class Job(models.Model):
     asTo = models.OneToOneField(User, related_name='worker' , on_delete=models.SET_NULL, null=True, blank=True)
     is_available = models.BooleanField(default=True)
     is_complete = models.BooleanField(default=False)
+    is_ready = models.BooleanField(default=False)
     doneby = models.CharField(max_length=999, blank=True, null=True)
 
         

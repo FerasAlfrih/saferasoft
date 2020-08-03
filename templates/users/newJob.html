@@ -12,16 +12,18 @@
 	{% endblock title %}
 	{% block content %}
 	{% if user.is_superuser %}
-	    <div class="content-section">
-	      <form method="POST" enctype="multipart/form-data" novalidate="novalidate">
-			{% csrf_token %}
-			<fieldset class="form-group">
-				<legend class="border-bottom mb-4">New Job</legend>
-		  		{{form|crispy}}
-		  		<button class="btn btn-outline-info" type="submit">Post</button>
-			</fieldset>   
-	      </form>
-	    </div>
+		<center>
+		    <div class="content-section">
+		      <form method="POST" enctype="multipart/form-data" novalidate="novalidate">
+				{% csrf_token %}
+				<fieldset class="form-group">
+					<legend class="border-bottom mb-4">New Job</legend>
+			  		{{form|crispy}}
+			  		<button class="btn btn-outline-info" type="submit">Post</button>
+				</fieldset>   
+		      </form>
+		    </div>
+		</center>
 	{% else %}  
 	    <center>
 	      <img src="{% static 'img/adminOnly.png' %}">  

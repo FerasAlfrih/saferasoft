@@ -4,4 +4,105 @@
 	margin: 0;
 	
 }
+.debt{
+	float: left;
+	background-color: red;
+	color:white;
+}
+.expired{
+	background-color:#800517;
+	padding: 40px;
+	position: initial;
+	justify-content: center;
+	align-items: center;
+}
+.expired .job{
+	width: 25%;
+	display: inline-block;
+	position: inherit;
+	margin: 20px;
+	padding: 25px;
+}
 
+.expired legend{
+	color:gold;
+	margin-top: 0;
+	
+}
+.expired .job .title{
+	color:#3D3C3A;
+}
+.expired .job .username{
+	color:#BCC6CC;
+}
+.ready{
+	background-color:#800517;
+	padding: 40px;
+	position: initial;
+	justify-content: center;
+	align-items: center;
+}
+.ready .job{
+	width: 25%;
+	display: inline-block;
+	position: relative;
+	justify-content: center;
+	align-items: center;
+	margin: 20px;
+	padding: 25px;
+}
+
+.ready legend{
+	color:gold;
+	margin-top: 0;
+	
+}
+.ready .job .title{
+	color:#3D3C3A;
+	
+	
+}
+.ready .job .username{
+	color:#BCC6CC;
+	
+}
+.user{
+	background-color:#800517;
+	padding: 40px;
+	position: initial;
+	justify-content: center;
+	align-items: center;
+}
+.user .job{	
+	display: inline-block;
+	position: inherit;	
+	padding: 25px;
+	overflow: auto;
+}
+.user .job .p1{
+	float: left;
+	margin: 20px;
+}
+.user .job .p2{
+	float: right;
+	margin: 20px;
+}
+.user .job .p3{
+	margin: 20px;
+	
+}
+
+.user legend{
+	color:gold;
+	margin-top: 0;
+	
+}
+.user big{
+	font-weight: bold;
+}
+.user .username{
+	color:#7F4E52;
+}
+.user .balance{
+	color:#BCC6CC;
+}
