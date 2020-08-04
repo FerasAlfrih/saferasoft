@@ -12,170 +12,224 @@
 {% endblock title %}
 {% block content %}
 {% if user.is_superuser %}
-	<center>
+	<center>		
 		<div class="admin">
-			<div class="debt">
-				My Debts: -{{debt}}$
-			</div><br>
-			<div class="expired">
-				<legend>Out Dated</legend>	
-				{% for job in jobs %}
-					{% if job.deadline <= today.date %}
-						<div class="job">
-							<div class="title"><a href="{% url 'job_details' job.id %}">{{ job.job }}</a></div>
-							<div class="username">{{job.asTo}}</div>
-							<div class="username">{{job.withdrawal}}$</div>
-							<form method="POST" name="extend">
-								{% csrf_token %}
-								<input type="number" name="withdrawal" value="0" hidden/>
-								<input type="date" name="date"/>
-								<input type="text" readonly name="job" value="{{job.job}}" hidden/>
-								<button class="btn btn-warning" type="submit"	name="extend" onclick="">Extend</button>
-							</form><br>
-							<form method="POST" name="charge">
-								{% csrf_token %}
-								<input type="date" name="date" value="{{job.deadline}}" hidden/>
-								<input type="number" name="withdrawal"/>
-								<input type="text" readonly name="job" value="{{job.job}}" hidden/>
-								<button class="btn btn-danger" type="submit" name="charge" onclick="">Charge</button>
-							</form>
-						</div>					
-					{% endif %}
-				{% endfor %}
-										
+			<button class="collapsible">Balance</button>			
+			<div class="content">
+				<div class="user">
+					<legend>
+						My Balance
+						<div class="debt">
+							{{debt}}$
+						</div><br>
+					</legend>
+					{% for user in users %}
+						{% if user.profile.balance > 1000 %}					
+							<div class="job">
+								<div class="p1">
+									<big class="username">{{ user.username }}: </big> <big class="balance">{{user.profile.balance}}$</big>
+								</div>
+								<div class="p3">
+									<form method="POST"  class="p3"><br>
+										{% csrf_token %}
+										<input type="text" name="user" value="{{user.username}}" hidden>
+										<input type="number" name="payment">
+										<button class="btn btn-danger" name="cash">Cashout</button>						
+									</form>
+								</div>									
+							</div>
+						{% endif %}
+					{% endfor %}
+				</div>	
 			</div><hr>
-			<div class="ready">
-				<legend>Ready</legend>	
-				{% for job in jobs %}
-					{% if job.is_ready %}
-						<div class="job">
-							<div class="title"><a href="{% url 'job_details' job.id %}"> {{job.job}} </a></div>
-							<div class="username">{{job.asTo}}</div>
-							<div class="username">{{job.salary}}$</div>
-							<form method="POST" name="extend">
-								{% csrf_token %}
-								<input type="number" name="withdrawal" value="0" hidden/>
-								<input type="date" name="date"/>
-								<input type="text" readonly name="job" value="{{job.job}}" hidden/>
-								<button class="btn btn-warning" type="submit"	name="extend" onclick="">Extend</button>
-							</form><br>
-							<form method="POST" name="complete">
-								{% csrf_token %}
-								<input type="text" name="job" value="{{job.job}}" hidden>
-								<input type="text" name="user" value="{{user.username}}" hidden>
-								<input type="number" name="payment" >
-								<button class="btn btn-danger" type="submit" name="complete" onclick="">Complete</button>
-							</form>
-						</div>					
-					{% endif %}
-				{% endfor %}										
+			<button class="collapsible">Staff Requests</button>			
+			<div class="content">
+				<div class="user">
+					<legend>Staff requests</legend>
+					{% for user in users %}
+						{% if user.profile.staff_requested %}					
+							<div class="job">
+								<div class="p1">
+									<big class="username">{{ user.username }}: </big> <big class="balance">{{user.profile.balance}}$</big><br>
+									<form method="POST" class="p1">
+										{% csrf_token %}
+										<input type="text" name="user" value="{{user.username}}" hidden>
+										is_staff:{%if  user.is_staff  %} <input type="checkbox" name="staff" checked>{% else %}<input type="checkbox" name="staff">{% endif %} <br>
+										is_superuser:{%if  user.is_superuser  %}<input type="checkbox" name="superuser" checked>{% else %}<input type="checkbox" name="superuser">{% endif %}	<br>									
+										<button class="btn btn-warning" name="accept" >Accept</button>
+										<button class="btn btn-danger" name="deny" >reject</button>
+									</form>
+								</div>
+							</div>
+						{% endif %}
+					{% endfor %}
+				</div>
 			</div><hr>
-			<div class="joblist">
-				<legend>Not Taken</legend>	
-				{% for job in jobs %}
-					{% if job.is_available and job.asTo == None %}
-						<div class="job">
-							<div class="title"><a href="{% url 'job_details' job.id %}"> {{job.job}} </a></div>
-							<div class="username">{{job.asTo}}</div>
-							<div class="username">{{job.salary}}$</div>
-							<form method="POST" name="extend">
-								{% csrf_token %}
-								<input type="number" name="withdrawal" value="0" hidden/>
-								<input type="date" name="date"/>
-								<input type="text" readonly name="job" value="{{job.job}}" hidden/>
-								<button class="btn btn-warning" type="submit"	name="extend" onclick="">Extend</button>
-							</form><br>
-							<form method="POST" name="complete">
-								{% csrf_token %}
-								<input type="text" name="job" value="{{job.job}}" hidden>
-								<input type="text" name="user" value="{{user.username}}" hidden>
-								<input type="number" name="payment" >
-								<button class="btn btn-danger" type="submit" name="complete" onclick="">Complete</button>
-							</form>
-						</div>					
-					{% endif %}
-				{% endfor %}	
-				<legend>Completed</legend>	
-				{% for job in jobs %}
-					{% if job.is_complete %}
-						<div class="job">
-							<div class="title"><a href="{% url 'job_details' job.id %}"> {{job.job}} </a></div>
-							<div class="username">{{job.asTo}}</div>
-							<div class="username">{{job.salary}}$</div>
-							<form method="POST" name="extend">
-								{% csrf_token %}
-								<input type="number" name="withdrawal" value="0" hidden/>
-								<input type="date" name="date"/>
-								<input type="text" readonly name="job" value="{{job.job}}" hidden/>
-								<button class="btn btn-warning" type="submit"	name="extend" onclick="">Extend</button>
-							</form><br>
-							<form method="POST" name="complete">
-								{% csrf_token %}
-								<input type="text" name="job" value="{{job.job}}" hidden>
-								<input type="text" name="user" value="{{user.username}}" hidden>
-								<input type="number" name="payment" >
-								<button class="btn btn-danger" type="submit" name="complete" onclick="">Complete</button>
-							</form>
-						</div>					
-					{% endif %}
-				{% endfor %}
-				<legend>Taken</legend>	
-				{% for job in jobs %}
-					{% if  job.is_complete != True and job.is_available != True and job.is_ready != True  %}
-						<div class="job">
-							<div class="title"><a href="{% url 'job_details' job.id %}"> {{job.job}} </a></div>
-							<div class="username">{{job.asTo}}</div>
-							<div class="username">{{job.salary}}$</div>
-							<form method="POST" name="extend">
-								{% csrf_token %}
-								<input type="number" name="withdrawal" value="0" hidden/>
-								<input type="date" name="date"/>
-								<input type="text" readonly name="job" value="{{job.job}}" hidden/>
-								<button class="btn btn-warning" type="submit"	name="extend" onclick="">Extend</button>
-							</form><br>
-							<form method="POST" name="complete">
-								{% csrf_token %}
-								<input type="text" name="job" value="{{job.job}}" hidden>
-								<input type="text" name="user" value="{{user.username}}" hidden>
-								<input type="number" name="payment" >
-								<button class="btn btn-danger" type="submit" name="complete" onclick="">Complete</button>
-							</form>
-						</div>					
-					{% endif %}
-				{% endfor %}													
+			<button class="collapsible">Out Dated Jobs</button>			
+			<div class="content">
+				<div class="admin-section">
+					<legend>Out Dated Jobs</legend>	
+					{% for job in jobs %}
+						{% if job.deadline <= today.date %}
+							<div class="job">
+								<div class="title"><a href="{% url 'job_details' job.id %}">{{ job.job }}</a></div>
+								<div class="username">{{job.asTo}}</div>
+								<div class="username">{{job.withdrawal}}$</div>
+								<form method="POST" name="extend">
+									{% csrf_token %}
+									<input type="number" name="withdrawal" value="0" hidden/>
+									<input type="date" name="date"/>
+									<input type="text" readonly name="job" value="{{job.job}}" hidden/>
+									<button class="btn btn-warning" type="submit"	name="extend" onclick="">Extend</button>
+								</form><br>
+								<form method="POST" name="charge">
+									{% csrf_token %}
+									<input type="date" name="date" value="{{job.deadline}}" hidden/>
+									<input type="number" name="withdrawal"/>
+									<input type="text" readonly name="job" value="{{job.job}}" hidden/>
+									<button class="btn btn-danger" type="submit" name="charge" onclick="">Charge</button>
+								</form>
+							</div>					
+						{% endif %}
+					{% endfor %}	
+				</div>									
 			</div><hr>
-			<div class="user">
-				<legend>User</legend>
-				{% for user in users %}					
-					<div class="job">
-						<div class="p1">
-							<big class="username">{{ user.username }}: </big> <big class="balance">{{user.profile.balance}}$</big><br>
-							<form method="POST">
-								{% csrf_token %}
-								<input type="text" name="user" value="{{user.username}}" hidden>
-								is_staff:{%if  user.is_staff  %} <input type="checkbox" name="staff" checked>{% else %}<input type="checkbox" name="staff">{% endif %} <br>
-								is_superuser:{%if  user.is_superuser  %}<input type="checkbox" name="superuser" checked>{% else %}<input type="checkbox" name="superuser">{% endif %}	<br>									
-								<button class="btn btn-btn" name="updateuser" >update</button>
-							</form>
+			<button class="collapsible">Ready Jobs</button>			
+			<div class="content">
+				<div class="admin-section">
+					<legend>Ready Jobs</legend>	
+					{% for job in jobs %}
+						{% if job.is_ready %}
+							<div class="job">
+								<div class="title"><a href="{% url 'job_details' job.id %}"> {{job.job}} </a></div>
+								<div class="username">{{job.asTo}}</div>
+								<div class="username">{{job.salary}}$</div>
+								<form method="POST" name="extend">
+									{% csrf_token %}
+									<input type="number" name="withdrawal" value="0" hidden/>
+									<input type="date" name="date"/>
+									<input type="text" readonly name="job" value="{{job.job}}" hidden/>
+									<button class="btn btn-warning" type="submit"	name="extend" onclick="">Extend</button>
+								</form><br>
+								<form method="POST" name="complete">
+									{% csrf_token %}
+									<input type="text" name="job" value="{{job.job}}" hidden>
+									<input type="text" name="user" value="{{user.username}}" hidden>
+									<input type="number" name="payment" >
+									<button class="btn btn-danger" type="submit" name="complete" onclick="">Complete</button>
+								</form>
+							</div>					
+						{% endif %}
+					{% endfor %}
+				</div>										
+			</div><hr>
+			<button class="collapsible">Not-Taken Jobs</button>			
+			<div class="content">
+				<div class="admin-section">
+					<legend>Not Taken Jobs</legend>	
+					{% for job in jobs %}
+						{% if job.is_available and job.asTo == None %}
+							<div class="job">
+								<div class="title"><a href="{% url 'job_details' job.id %}"> {{job.job}} </a></div>
+								<div class="username">{{job.asTo}}</div>
+								<div class="username">{{job.salary}}$</div>
+								<form method="POST" name="extend">
+									{% csrf_token %}
+									<input type="number" name="withdrawal" value="0" hidden/>
+									<input type="date" name="date"/>
+									<input type="text" readonly name="job" value="{{job.job}}" hidden/>
+									<button class="btn btn-warning" type="submit"	name="extend" onclick="">Extend</button>
+								</form><br>
+								<form method="POST" name="complete">
+									{% csrf_token %}
+									<input type="text" name="job" value="{{job.job}}" hidden>
+									<input type="text" name="user" value="{{user.username}}" hidden>
+									<input type="number" name="payment" >
+									<button class="btn btn-danger" type="submit" name="complete" onclick="">Complete</button>
+								</form>
+							</div>					
+						{% endif %}
+					{% endfor %}
+				</div>
+			</div><hr>
+			<button class="collapsible">Completed Jobs</button>			
+			<div class="content">
+				<div class="admin-section">	
+					<legend>Completed Jobs</legend>	
+					{% for job in jobs %}
+						{% if job.is_complete %}
+							<div class="job">
+								<div class="title"><a href="{% url 'job_details' job.id %}"> {{job.job}} </a></div>
+								<div class="username">{{job.doneby}}</div>
+								<div class="username">{{job.salary}}$</div>
+							</div>					
+						{% endif %}
+					{% endfor %}
+				</div>
+			</div><hr>
+			<button class="collapsible">Taken Jobs</button>			
+			<div class="content">
+				<div class="admin-section">	
+					<legend>Taken Jobs</legend>	
+					{% for job in jobs %}
+						{% if  job.is_complete != True and job.is_available != True and job.is_ready != True  %}
+							<div class="job">
+								<div class="title"><a href="{% url 'job_details' job.id %}"> {{job.job}} </a></div>
+								<div class="username">{{job.asTo}}</div>
+								<div class="username">{{job.salary}}$</div>
+								<form method="POST" name="extend">
+									{% csrf_token %}
+									<input type="number" name="withdrawal" value="0" hidden/>
+									<input type="date" name="date"/>
+									<input type="text" readonly name="job" value="{{job.job}}" hidden/>
+									<button class="btn btn-warning" type="submit"	name="extend" onclick="">Extend</button>
+								</form><br>
+								<form method="POST" name="complete">
+									{% csrf_token %}
+									<input type="text" name="job" value="{{job.job}}" hidden>
+									<input type="text" name="user" value="{{user.username}}" hidden>
+									<input type="number" name="payment" >
+									<button class="btn btn-danger" type="submit" name="complete" onclick="">Complete</button>
+								</form>
+							</div>					
+						{% endif %}
+					{% endfor %}	
+				</div>																	
+			</div><hr>
+			<button class="collapsible">Users</button>			
+			<div class="content">
+				<div class="user">
+					<legend>Users</legend>
+					{% for user in users %}					
+						<div class="job">
+							<div class="p1">
+								<big class="username">{{ user.username }}: </big> <big class="balance">{{user.profile.balance}}$</big><br>
+								<form method="POST"  class="p1">
+									{% csrf_token %}
+									<input type="text" name="user" value="{{user.username}}" hidden>
+									is_staff:{%if  user.is_staff  %} <input type="checkbox" name="staff" checked>{% else %}<input type="checkbox" name="staff">{% endif %} <br>
+									is_superuser:{%if  user.is_superuser  %}<input type="checkbox" name="superuser" checked>{% else %}<input type="checkbox" name="superuser">{% endif %}	<br>									
+									<button class="btn btn-btn" name="updateuser" >Update</button>
+								</form>
+							</div>
+							<div class="p2">
+								{{user.profile.jobAs}}<br>								
+								{{user.profile.jobAs.salary}} - 
+								{{user.profile.jobAs.deadline}}
+							</div>	
+							<div class="p3">
+								<form method="POST"  class="p3">
+									{% csrf_token %}
+									<input type="text" name="job" value="{{user.profile.jobAs.job}}" hidden>
+									<input type="text" name="user" value="{{user.username}}" hidden>
+									<input type="number" name="payment">
+									<button class="btn btn-warning" name="pay">Pay</button>
+									<button class="btn btn-danger" name="cash">Cashout</button>						
+								</form>
+							</div>								
 						</div>
-						<div class="p2">
-							{{user.profile.jobAs}}<br>								
-							{{user.profile.jobAs.salary}} - 
-							{{user.profile.jobAs.deadline}}
-						</div>	
-						<div class="p3">
-							<form method="POST">
-								{% csrf_token %}
-								<input type="text" name="job" value="{{user.profile.jobAs.job}}" hidden>
-								<input type="text" name="user" value="{{user.username}}" hidden>
-								<input type="number" name="payment">
-								<button class="btn btn-warning" name="pay">Pay</button>
-								<button class="btn btn-danger" name="cash">Cashout</button>						
-							</form>
-						</div>		
-						
-					</div>
-				{% endfor %}					
+					{% endfor %}		
+				</div>			
 			</div><hr>
 		</div>
 	</center>    
@@ -185,3 +239,21 @@
     </center>    
 {% endif %}	
 {% endblock content %}
+{% block js %}
+	<script>
+		var coll = document.getElementsByClassName("collapsible");
+		var i;
+
+		for (i = 0; i < coll.length; i++) {
+		  coll[i].addEventListener("click", function() {
+		    this.classList.toggle("active");
+		    var content = this.nextElementSibling;
+		    if (content.style.maxHeight){
+		      content.style.maxHeight = null;
+		    } else {
+		      content.style.maxHeight = content.scrollHeight + "px";
+		    }
+		  });
+		}
+	</script>
+{% endblock js %}

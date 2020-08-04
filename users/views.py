@@ -38,8 +38,7 @@ class UsersV(View):
     @staticmethod
     def register2(request, *args, **kwargs):
         if request.user.is_authenticated:
-            if request.method == 'POST':
-                
+            if request.method == 'POST':                
                 pform = ProfileUpdateForm(request.POST,
                                         request.FILES,
                                         instance=request.user.profile)
@@ -49,11 +48,9 @@ class UsersV(View):
                     username = pform.cleaned_data.get('username')
                     messages.success(request, f'Welcome to our family!')
                     return redirect('base')
-            else:
-                
+            else:                
                 pform = ProfileUpdateForm()
-            context={
-           
+            context={           
             'pform':pform,
             }
             return render(request, 'users/register2.html', context)
@@ -63,24 +60,30 @@ class UsersV(View):
     @login_required
     def profile(request):
         if request.method == 'POST':
-            u_form = UserUpdateForm(request.POST, instance=request.user)
-            p_form = ProfileUpdateForm(request.POST,
-                                    request.FILES,
-                                    instance=request.user.profile)
-            if u_form.is_valid() and p_form.is_valid():
-                u_form.save()
-                p_form.save()
-                messages.success(request, f'Your account has been updated!')
-                return redirect('profile')
-
+            if request.POST.get('update') == '':                
+                u_form = UserUpdateForm(request.POST, instance=request.user)
+                p_form = ProfileUpdateForm(request.POST,
+                                        request.FILES,
+                                        instance=request.user.profile)
+                if u_form.is_valid() and p_form.is_valid():
+                    u_form.save()
+                    p_form.save()
+                    messages.success(request, f'Your account has been updated!')
+                    return redirect('profile')
+               
+            if request.POST.get('staff') == '':
+                user = request.user   
+                user.profile.staff_requested = True
+                user.save()
+                u_form = UserUpdateForm(instance=request.user)
+                p_form = ProfileUpdateForm(instance=request.user.profile)
         else:
             u_form = UserUpdateForm(instance=request.user)
             p_form = ProfileUpdateForm(instance=request.user.profile)
-
-        context = {
-            'u_form': u_form,
-            'p_form': p_form
-        }
+            context = {
+                'u_form': u_form,
+                'p_form': p_form
+            }
 
         return render(request, 'users/profile.html', context)
 
@@ -123,18 +126,23 @@ class UsersV(View):
     @login_required
     def jobs(request, *args, **kwargs):
         if request.method=='POST':
-            user=request.user
-            take = request.POST['job']
-            take =Job.objects.get(id=take)
-            usr = Profile.objects.get(user=user)
-            if usr.jobAs == None:
-                usr.jobAs = take
-                usr.save()
-                take.is_available = False
-                take.asTo = usr.user
-                take.save()
-            else:
-                messages.warning(request,f'Finish your assigned job first!')
+            if request.POST.get('staff') == '':
+                user = request.user   
+                user.profile.staff_requested = True
+                user.save()
+            elif request.POST.get('take') == '':
+                user=request.user
+                take = request.POST['job']
+                take =Job.objects.get(id=take)
+                usr = Profile.objects.get(user=user)
+                if usr.jobAs == None:
+                    usr.jobAs = take
+                    usr.save()
+                    take.is_available = False
+                    take.asTo = usr.user
+                    take.save()
+                else:
+                    messages.warning(request,f'Finish your assigned job first!')
 
             
         job= Job.objects.filter(is_available=True).order_by('-startDate')
@@ -189,7 +197,18 @@ class UsersV(View):
                     user=request.POST['user']
                     user = User.objects.get(username=user)           
                     user.is_staff = request.POST.get('staff', '')== 'on' or False
-                    user.is_superuser = request.POST.get('superuser', '') == 'on' or False
+                    user.is_superuser = request.POST.get('superuser', '') == 'on' or False                    
+                    user.save()
+                elif request.POST.get('accept') == '':
+                    user=request.POST['user'] 
+                    user = User.objects.get(username=user) 
+                    user.is_staff = request.POST.get('staff', '')== 'on' or False
+                    user.is_superuser = request.POST.get('superuser', '') == 'on' or False 
+                    user.profile.staff_requested = False
+                    user.save()
+                elif request.POST.get('deny') == '':
+                    user=request.POST['user']  
+                    user.profile.staff_requested = False
                     user.save()
                 elif request.POST.get('charge') == '':
                     withdrawal=request.POST['withdrawal']
@@ -256,7 +275,7 @@ class UsersV(View):
             debt = 0
             for profile in profiles:
                 blns=profile.balance
-                debt+=blns
+                debt+=blns * -1
 
             today = timezone.now()
             context={

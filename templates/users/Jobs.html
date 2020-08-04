@@ -46,7 +46,7 @@
               <input type="text" name="job" value={{job.id}}>
               <input type="text" name="user" value="{{user}}">
             </fieldset>
-            <button class="btn btn-danger">Take the job</button>
+            <button class="btn btn-danger" name="take">Take the job</button>
           </form>
         </div>
       {% endfor %}
@@ -54,6 +54,13 @@
     </div> 
   {% else %}  
     <center>
+      {% if user.is_staff != True and user.profile.staff_requested != True %}
+        <form method="POST">
+          {% csrf_token %}
+          <input type="text" name="user" value="{{user.username}}" hidden>
+          <button class="btn btn-danger" name="staff">Request a staff permission</button>
+        </form>
+      {% endif %}
       <img src="{% static 'img/staffOnly.png' %}">  
     </center>    
   {% endif %}

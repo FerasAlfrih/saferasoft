@@ -27,7 +27,7 @@
 
     <!-- my styling files -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/socialMedia.css' %}">
-    {% if user.profile.sex == 'Female' %}
+    {% if user.profile.sex == '2' %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/female.css' %}">
     {% else %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/male.css' %}">
@@ -251,6 +251,8 @@
       setActive();
       sticky();
     </script>
+    {% block js %}
+    {% endblock js %}
 
   </body>
 </html>

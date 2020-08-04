@@ -28,6 +28,7 @@ class Profile(models.Model):
     balance = models.IntegerField(default=0, blank=True, null=True)
     sex = models.CharField(max_length=6, blank=True, null=True)
     last_logout = models.DateField(default='1970-01-01', blank=True, null=True)
+    staff_requested = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.user.username} Profile'

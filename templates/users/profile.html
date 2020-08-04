@@ -22,9 +22,16 @@
                 {{ p_form|crispy }}
             </fieldset>
             <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Update</button>
+                <button class="btn btn-outline-info" type="submit" name="update">Update</button>
             </div>
         </form>
+        {% if user.is_staff != True and user.profile.staff_requested != True %}
+          <form method="POST">
+            {% csrf_token %}
+            <input type="text" name="user" value="{{user.username}}" hidden>
+            <button class="btn btn-danger" name="staff">Request a staff permission</button>
+          </form>
+        {% endif %}
       </div>
   </center>    
 {% endblock content %}

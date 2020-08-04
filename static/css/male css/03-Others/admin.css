@@ -5,18 +5,20 @@
 	
 }
 .debt{
-	float: left;
+	border-radius: 5px;
+	
 	background-color: red;
 	color:white;
 }
-.expired{
+.admin-section{
+	border-radius:20px;
 	background-color:#800517;
 	padding: 40px;
 	position: initial;
 	justify-content: center;
 	align-items: center;
 }
-.expired .job{
+.admin-section .job{
 	width: 25%;
 	display: inline-block;
 	position: inherit;
@@ -24,49 +26,21 @@
 	padding: 25px;
 }
 
-.expired legend{
+.admin-section legend{
 	color:gold;
 	margin-top: 0;
 	
 }
-.expired .job .title{
+.admin-section .job .title{
 	color:#3D3C3A;
 }
-.expired .job .username{
+.admin-section .job .username{
 	color:#BCC6CC;
-}
-.ready{
-	background-color:#800517;
-	padding: 40px;
-	position: initial;
-	justify-content: center;
-	align-items: center;
-}
-.ready .job{
-	width: 25%;
-	display: inline-block;
-	position: relative;
-	justify-content: center;
-	align-items: center;
-	margin: 20px;
-	padding: 25px;
 }
 
-.ready legend{
-	color:gold;
-	margin-top: 0;
-	
-}
-.ready .job .title{
-	color:#3D3C3A;
-	
-	
-}
-.ready .job .username{
-	color:#BCC6CC;
-	
-}
+
 .user{
+	border-radius:20px;
 	background-color:#800517;
 	padding: 40px;
 	position: initial;
@@ -82,13 +56,16 @@
 .user .job .p1{
 	float: left;
 	margin: 20px;
+	color:#BCC6CC;
 }
 .user .job .p2{
 	float: right;
 	margin: 20px;
+	color:#BCC6CC;
 }
 .user .job .p3{
-	margin: 20px;
+	margin: 10px;
+	color:#BCC6CC;
 	
 }
 
@@ -100,9 +77,45 @@
 .user big{
 	font-weight: bold;
 }
-.user .username{
-	color:#7F4E52;
+.user .job .p1 .username{
+	color:gold;
 }
-.user .balance{
+
+.user .job .p1 .balance{
 	color:#BCC6CC;
+}
+.collapsible {
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #555;
+}
+
+.collapsible:after {
+  content: '\002B';
+  color: white;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2212";
+}
+
+.content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: #f1f1f1;
 }
