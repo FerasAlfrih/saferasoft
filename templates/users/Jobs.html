@@ -40,13 +40,16 @@
               <big>Deadline: {{job.deadline}}</big>
             </span>
           </div><br>
-          <form method="POST">
+          <form method="POST" id='job'>
             {% csrf_token %}
             <fieldset hidden="True">
               <input type="text" name="job" value={{job.id}}>
               <input type="text" name="user" value="{{user}}">
             </fieldset>
-            <button class="btn btn-danger" name="take">Take the job</button>
+            <button class="btn btn-warning" name="take">Take the job</button>
+            {% if user.is_superuser %}
+              <button class="btn btn-danger" name="delete" id='del' >Delete</button>
+            {% endif %}  
           </form>
         </div>
       {% endfor %}
@@ -65,3 +68,18 @@
     </center>    
   {% endif %}
 {% endblock content %}
+{% block js %}
+<script type="text/javascript">
+  var del = document.getElementById('del');
+  var frm = document.getElementById('job');
+  del.onclick = function delcon(e){
+      if(!confirm("Are you sure you want to delete?")){
+        e.preventDefault();
+      }else{
+        frm.submit()
+  };
+  }  
+ 
+</script>
+
+{% endblock js %}

@@ -125,6 +125,8 @@ class UsersV(View):
 
     @login_required
     def jobs(request, *args, **kwargs):
+        messages.success(request, f"these data are just dummy, the website is still under-Construction!")
+        messages.success(request, f"please feel free to check it out, and we're gratefully waiting for your feedback")
         if request.method=='POST':
             if request.POST.get('staff') == '':
                 user = request.user   
@@ -133,7 +135,7 @@ class UsersV(View):
             elif request.POST.get('take') == '':
                 user=request.user
                 take = request.POST['job']
-                take =Job.objects.get(id=take)
+                take = Job.objects.get(id=take)
                 usr = Profile.objects.get(user=user)
                 if usr.jobAs == None:
                     usr.jobAs = take
@@ -143,6 +145,10 @@ class UsersV(View):
                     take.save()
                 else:
                     messages.warning(request,f'Finish your assigned job first!')
+            elif request.POST.get('delete') == '':
+                job = request.POST['job']
+                job = Job.objects.get(id=job).delete()
+
 
             
         job= Job.objects.filter(is_available=True).order_by('-startDate')
@@ -153,7 +159,9 @@ class UsersV(View):
 
 
     @login_required
-    def job_details(request, pk, *args,  **kwargs):        
+    def job_details(request, pk, *args,  **kwargs): 
+        messages.success(request, f"these data are just dummy, the website is still underconstruction!")
+        messages.success(request, f"please feel free to check it out, and we're gratefully waiting for your feedback")       
         job = Job.objects.get(id=pk)
 
         if request.method=='POST':
@@ -169,6 +177,7 @@ class UsersV(View):
                     take.is_available = False
                     take.asTo = usr.user
                     take.save()
+                    return redirect('jobs')
                 else:
                     messages.warning(request,f'Finish your assigned job first!')
             elif request.POST.get('ready') == '':
@@ -178,6 +187,10 @@ class UsersV(View):
                 usr = Profile.objects.get(user=user)
                 ready.is_ready = True
                 ready.save()
+                return redirect('jobs')
+            elif request.POST.get('delete') == '':
+                job = request.POST['job']
+                job = Job.objects.get(id=job).delete()
                 return redirect('jobs')
 
 

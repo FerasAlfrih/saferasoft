@@ -34,7 +34,7 @@
 	              <big>Deadline: {{job.deadline}}</big>
 	            </span>
 	          </div><br>
-	          <form method="POST">
+	          <form method="POST" id="job">
 	            {% csrf_token %}
 	            <fieldset hidden="True">
 	              <input type="text" name="job" value={{job.id}}>
@@ -42,12 +42,17 @@
 	            </fieldset>
 	           
 	            {% if job.is_available %}
-	            <button class="btn btn-danger" name='take'>Take the job</button>
+	            	<button class="btn btn-danger" name='take'>Take the job</button>
 	            {% endif %}
-	            {% if job.asTo == user and job.is_ready == False %}
 
-	            <button class="btn btn-warning" name='ready'>Mark Ready</button>
+	            {% if job.asTo == user and job.is_ready == False %}
+	            	<button class="btn btn-warning" name='ready'>Mark Ready</button>
 	            {% endif %}
+
+	            {% if user.is_superuser %}
+	             	<button class="btn btn-danger" name="delete" id='del' >Delete</button>
+	            {% endif %}
+	            
 	          </form>
 	        </div>
 	  	{% else %}  
@@ -57,3 +62,18 @@
 	 	{% endif %}
 	</center>	
 {% endblock content %}
+{% block js %}
+<script type="text/javascript">
+  var del = document.getElementById('del');
+  var frm = document.getElementById('job');
+  del.onclick = function delcon(e){
+      if(!confirm("Are you sure you want to delete?")){
+        e.preventDefault();
+      }else{
+        frm.submit()
+  };
+  }  
+ 
+</script>
+
+{% endblock js %}

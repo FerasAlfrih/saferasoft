@@ -6,7 +6,7 @@ def about(request):
     return render(request, 'soon.html')
 
 
-def profolio(request):
+def portfolio(request):
     return render(request, 'soon.html')
 
 

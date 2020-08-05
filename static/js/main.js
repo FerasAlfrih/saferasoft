@@ -6,9 +6,7 @@ function setActive() {
 	var activePage = window.location.href;
 	activePage=activePage.split("/", 20);
 	activePage=activePage[activePage.length -2];
-	console.log(activePage);
 	activePage =toTitleCase(activePage);
-	console.log(activePage);
 	var btn = document.getElementById(activePage); 
 	btn.className += ' active'; 
 

@@ -33,7 +33,7 @@ class NewJob(forms.ModelForm):
     deadline = forms.DateField()
     salary = forms.IntegerField()
     withdrawal = forms.IntegerField()
-    details = forms.CharField()
+    details = forms.Textarea()
 
     class Meta:
         model = Job
