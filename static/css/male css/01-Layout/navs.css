@@ -1,5 +1,4 @@
 .navigate nav {
-	background-color: transparent;
 	margin-top: 20px;
 	padding: 0;
 	width: 100%;
@@ -39,6 +38,11 @@
 }
 
 #navbar .active {
+	color: #FF0000;
+	
+}
+
+.active {
 	color: #FF0000;
 	
 }

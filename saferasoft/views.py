@@ -7,7 +7,7 @@ def about(request):
 
 
 def portfolio(request):
-    return render(request, 'soon.html')
+    return render(request, 'saferasoft/portfolio.html')
 
 
 def contact(request):

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Portfolio{% endblock title %}
+{% block content %}
+    <!-- Portfolio Grid-->
+    <section class="page-section " id="portfolio">
+        <div class="container filler">
+            <div class="text-center mt-5">
+                <h2 class="section-heading text-uppercase">Portfolio</h2><br>
+                <h3 class="section-subheading text-muted">You didn't get it yet?</h3><br>
+                <button class="bn btn-warning" id="show">Solve it</button>
+            </div>
+            
+        </div>
+        <div class="portfolio" id="reveal" style="display: none;">
+          <img src="{% static 'img/portfolio.png' %}" width="100%" height="100%">
+        </div>
+    </section>
+{% endblock content %}
+{% block js %}
+    <script type="text/javascript">
+        var rv = document.getElementById('reveal');
+        var btn = document.getElementById('show');
+        var navs = document.getElementsByClassName('nav-btn');        
+        var navcls= "navigate nav-btn js-scroll-trigger";
+        var act = document.getElementById('Portfolio');
+        var logo = document.getElementById('logo');
+        var logocls = logo.className;
+        var usr = document.getElementById('usr-prf');
+        var usrcls= usr.className;
+        var footer = document.getElementById('footer');
+            footer.style = "position:fixed"
+        btn.onclick = function(){
+            rv.style = ("display:all");
+            logo.className = act.className;
+            usr.className = act.className;
+            for (i = 0; i < navs.length; i++){
+                navs[i].className =act.className;
+                
+        };
+        };
+        rv.onclick = function(){
+            rv.style = ("display:none");
+            logo.className = logocls;
+            usr.className = usrcls;
+            for (i = 0; i < navs.length; i++){
+                navs[i].className =navcls;
+        };
+        setActive();
+    };
+    </script>   
+{% endblock js %}
