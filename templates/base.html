@@ -79,6 +79,9 @@
               <li class="navigate" >
                 <a class="navigate nav-btn js-scroll-trigger"href="{% url 'base' %}" id="Home">Home</a>
               </li>
+              <li class="navigate">
+                <a class="navigate nav-btn js-scroll-trigger"href="{% url 'products' %}" id="Products">Products</a>
+              </li>
               {% if user.is_staff %}
               <li class="navigate">
                 <a class="navigate nav-btn js-scroll-trigger"href="{% url 'jobs' %}" id="Jobs">Jobs</a>

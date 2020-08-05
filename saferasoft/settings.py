@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'covid19.apps.Covid19Config',
     'base.apps.BaseConfig',
     'users.apps.UsersConfig',
+    'products.apps.ProductsConfig',
     'django_countries',
     'rest_framework',
     'translations',

@@ -3,7 +3,7 @@
 {% load static %}
 {% block title %}
   {% if user.is_staff %}
-    Job Details
+    {{job.job}}
   {% else %}
     Staff Only Zone
   {% endif %}
