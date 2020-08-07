@@ -26,14 +26,19 @@
         var act = document.getElementById('Portfolio');
         var logo = document.getElementById('logo');
         var logocls = logo.className;
-        var usr = document.getElementById('usr-prf');
-        var usrcls= usr.className;
+         {% if user.is_authenticated %}
+            var usr = document.getElementById('usr-prf');
+            var usrcls= usr.className;
+        {% endif %}
         var footer = document.getElementById('footer');
-            footer.style = "position:fixed"
+            footer.style = "position:fixed";
+        
         btn.onclick = function(){
             rv.style = ("display:all");
             logo.className = act.className;
-            usr.className = act.className;
+            {% if user.is_authenticated %}
+             usr.className = act.className;
+            {% endif %} 
             for (i = 0; i < navs.length; i++){
                 navs[i].className =act.className;
                 
@@ -42,7 +47,9 @@
         rv.onclick = function(){
             rv.style = ("display:none");
             logo.className = logocls;
-            usr.className = usrcls;
+            {% if user.is_authenticated %}
+                usr.className = usrcls;
+            {% endif %}    
             for (i = 0; i < navs.length; i++){
                 navs[i].className =navcls;
         };
