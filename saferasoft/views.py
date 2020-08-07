@@ -15,7 +15,7 @@ def contact(request):
 
 
 def services(request):
-    return render(request, 'soon.html')
+    return render(request, 'saferasoft/services.html')
 
 
 def team(request):

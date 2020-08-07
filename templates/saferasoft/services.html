@@ -1,39 +1,44 @@
 {% extends 'base.html' %}
+{% load static %}
     {% block title %}Services{% endblock title %}
     {% block content %}
         <!-- Services-->
         <section class="page-section" id="services">
-            <div class="container">
+            <div class="container services">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Services</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-                </div>
-                <div class="row text-center">
-                    <div class="col-md-4">
-                        <span class="fa-stack fa-4x">
-                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                            <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i>
-                        </span>
-                        <h4 class="my-3">E-Commerce</h4>
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                    <h2 class="">Our Services</h2>
+                    <h3 class="">Freelance programming and Designing</h3>
+                </div><hr>
+                <div class="row services">
+                    <div class="col-md-4 services">
+                        <span class="services" >
+                            <img src="{% static 'img/webdes.jpg' %}">
+                        </span> <br>
+                        <h4 class="services">Frontend Development</h4>
+                        <p class="services" hidden>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
                     </div>
-                    <div class="col-md-4">
-                        <span class="fa-stack fa-4x">
-                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                            <i class="fas fa-laptop fa-stack-1x fa-inverse"></i>
-                        </span>
-                        <h4 class="my-3">Responsive Design</h4>
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                    <div class="col-md-4 services">
+                        <span class="services" >
+                           <img src="{% static 'img/webdev.jpg' %}">
+                        </span> <br>
+                        <h4 class="services">Backend Development</h4>
+                        <p class="services"  hidden>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
                     </div>
-                    <div class="col-md-4">
-                        <span class="fa-stack fa-4x">
-                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                            <i class="fas fa-lock fa-stack-1x fa-inverse"></i>
-                        </span>
-                        <h4 class="my-3">Web Security</h4>
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                    <div class="col-md-4 services">
+                        <span class="services" >
+                            <img src="{% static 'img/graphic.webp' %}">
+                        </span> <br>
+                        <h4 class="services">Graphic Designing</h4>
+                        <p class="services" hidden>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
                     </div>
-                </div>
+                </div> <hr>
             </div>
         </section>
     {% endblock content %}
+{% block js %}
+    <script type="text/javascript">
+        var footer = document.getElementById('footer');
+            footer.style = "position:fixed";
+        
+    </script>
+{% endblock js %}

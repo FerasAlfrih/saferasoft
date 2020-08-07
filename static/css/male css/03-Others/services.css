@@ -1,0 +1,28 @@
+.services {
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+	position: static;
+	align-content: space-between;
+	text-align: center;
+}
+.services img{
+	margin-top: 10px;
+	width: 300px;
+	height: 150px;
+}
+.services img:hover{
+	margin-top: 2px;
+	
+}
+.services h4{
+	margin-top: 10px;
+	color: #C68E17;
+}
+.services h2{
+	margin-top: 10px;
+	color: #BCC6CC;
+}
+.services h3{
+	color: #008080;
+}
