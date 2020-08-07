@@ -7,8 +7,8 @@ function setActive() {
 	activePage=activePage.split("/", 20);
 	activePage=activePage[activePage.length -2];
 	activePage =toTitleCase(activePage);
-	var btn = document.getElementById(activePage); 
-	btn.className += ' active'; 
+	var btn = document.getElementById(activePage);
+	btn.className += ' activeIn'; 
 
  	
 };

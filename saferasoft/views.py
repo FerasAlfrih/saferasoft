@@ -3,7 +3,7 @@ from .funcs import is_mobile, is_ar
 
 
 def about(request):
-    return render(request, 'soon.html')
+    return render(request, 'saferasoft/about.html')
 
 
 def portfolio(request):

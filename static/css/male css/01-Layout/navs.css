@@ -14,7 +14,6 @@
 	display: inline;
 	float: left;
 	margin: 10px;
-	color: #fff;
 
 }
 
@@ -37,12 +36,7 @@
  	
 }
 
-#navbar .active {
-	color: #FF0000;
-	
-}
-
-.active {
+#navbar .activeIn {
 	color: #FF0000;
 	
 }
